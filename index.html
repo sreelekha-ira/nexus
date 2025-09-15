@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nexus - Play, Stream, Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      background: linear-gradient(180deg, #161d22 15%, #101112 100%);
+      font-family: 'Roboto', sans-serif;
+      color: #dae1e6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #222a32;
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 35px;
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-img {
+      height: 42px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    nav ul li a,
+    .btn-accent {
+      color: #dae1e6;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: background 0.18s;
+    }
+    nav ul li a:hover,
+    .btn-accent:hover {
+      background: #273155;
+      color: #98a3d3;
+    }
+    .btn-accent {
+      background: linear-gradient(270deg, #b671ff, #656cff);
+      box-shadow: 0 4px 16px rgba(137, 110, 255, 0.18);
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 64px 35px 36px 35px;
+      max-width: 1300px;
+      margin: auto;
+    }
+    .hero-left {
+      max-width: 580px;
+    }
+    .hero-left h1 {
+      font-size: 2.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.18;
+      text-shadow: 0 0 28px #426bffcc;
+    }
+    .hero-left p {
+      font-size: 1.24rem;
+      color: #a3afb8;
+      margin-bottom: 32px;
+      line-height: 1.5;
+      text-shadow: 0 0 10px #212d36;
+    }
+    .download-row {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: #1c252c;
+      border-radius: 13px;
+      padding: 18px 28px;
+      box-shadow: 0 4px 16px #426bff25;
+    }
+    .app-btn img {
+      height: 38px;
+    }
+    .qr-code {
+      height: 42px;
+      width: 42px;
+    }
+    .hero-right img {
+      height: 340px;
+      border-radius: 23px;
+      box-shadow: 0 4px 28px #212d36;
+      margin-left: 28px;
+    }
+    .choose-nexus-section {
+      max-width: 1100px;
+      margin: 58px auto 0 auto;
+      padding: 0 35px;
+    }
+    .choose-nexus-title {
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.3rem;
+      margin-bottom: 34px;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+    .choose-nexus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 44px;
+    }
+    .choose-nexus-card {
+      background: #171921;
+      border-radius: 15px;
+      box-shadow: 0 0 0px 0px #b671ff;
+      padding: 38px 26px 28px 26px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 185px;
+      border: 2.5px solid transparent;
+      transition: 
+        transform 0.15s,
+        border-color 0.3s,
+        box-shadow 0.3s;
+    }
+    .choose-nexus-card:hover,
+    .choose-nexus-card:focus {
+      transform: scale(1.06);
+      border-color: #b030ed;
+      box-shadow: 0 0 38px 5px #c139ff33, 0 0 5px #b671ff;
+      z-index: 5;
+    }
+    .choose-nexus-icon {
+      height: 44px;
+      width: 44px;
+      margin-bottom: 20px;
+    }
+    .choose-nexus-card-title {
+      font-weight: 700;
+      font-size: 1.23rem;
+      color: #fff;
+      margin-bottom: 7px;
+      margin-top: -10px;
+    }
+    .choose-nexus-card-desc {
+      font-size: 1.06rem;
+      color: #cbc1ef;
+      margin-bottom: 0;
+      margin-top: 6px;
+      line-height: 1.7;
+    }
+    .testimonial-row {
+      background: #1c252c;
+      color: #ced7de;
+      border-radius: 16px;
+      padding: 25px 32px;
+      box-shadow: 0 3px 22px #426bff21;
+      font-size: 1.17rem;
+      max-width: 90%;
+      margin: 56px auto 0 auto;
+      text-align: center;
+      display: flex;
+      align-items: start;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .esports-section {
+      margin: 76px auto 0 auto;
+      padding: 0 35px;
+      max-width: 1300px;
+    }
+    .esports-section h2 {
+      font-size: 2.08rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 35px;
+    }
+    .esports-slider {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-left: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+    .esports-slider::-webkit-scrollbar {
+      display: none;
+    }
+    .game-tile {
+      background: #232a3b;
+      border-radius: 19px;
+      box-shadow: 0 3px 26px #426bff20;
+      width: 210px;
+      height: 270px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0;
+      transition: transform 0.15s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .game-tile:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 32px #b671ff42;
+    }
+    .game-tile img {
+      width: 92%;
+      height: 77%;
+      border-radius: 14px;
+      margin-top: 12px;
+      object-fit: cover;
+    }
+    .game-tile .game-title {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #dae1e6;
+      margin-top: 8px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .popular-section {
+      margin: 56px auto 0 auto;
+      max-width: 1300px;
+      padding: 0 35px;
+      text-align: left;
+    }
+    .popular-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    .popular-section p {
+      font-size: 1.07rem;
+      color: #a3afb8;
+    }
+    .popular-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 22px;
+    }
+    .popular-card {
+      background: #222a32;
+      border-radius: 15px;
+      box-shadow: 0 1px 16px #426bff09;
+      padding: 18px 13px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 1.07rem;
+      color: #dae1e6;
+    }
+    .popular-card img {
+      width: 52px;
+      height: 52px;
+      border-radius: 13px;
+      object-fit: cover;
+    }
+    .popular-card .popular-title {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #dae1e6;
+    }
+    .view-more-btn {
+      margin: 32px auto;
+      display: block;
+      background: #252a36;
+      color: #dae1e6;
+      border-radius: 9px;
+      border: none;
+      font-weight: 600;
+      font-size: 1.13rem;
+      padding: 16px 44px;
+      box-shadow: 0 3px 12px #426bff21;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .view-more-btn:hover {
+      background: #292937;
+    }
+    @media (max-width: 1024px) {
+      header {
+        padding: 0 16px;
+      }
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-right img {
+        height: 240px;
+        margin-left: 0;
+        margin-top: 24px;
+      }
+      .choose-nexus-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .choose-nexus-section {
+        padding: 0 10px;
+      }
+      .esports-section,
+      .popular-section {
+        padding: 0 16px;
+      }
+      .esports-slider {
+        gap: 16px;
+        margin-left: 0;
+      }
+      .popular-grid {
+        gap: 12px;
+      }
+      .testimonial-row {
+        padding: 15px 11px;
+      }
+    }
+    @media (max-width: 750px) {
+      .choose-nexus-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .esports-slider {
+        flex-wrap: wrap;
+      }
+      .game-tile {
+        width: 122px;
+        height: 155px;
+      }
+      .popular-card img {
+        width: 35px;
+        height: 35px;
+      }
+      .popular-card {
+        font-size: 0.99rem;
+        padding: 14px 9px;
+      }
+      .download-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="
+  width: 80px;
+  height: 80px;
+  background: #18191b;
+  border-radius: 50%;
+  border: 5px solid rgb(214, 12, 12);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 12px #b38d1c69;">
+  <img src="assets/images/image.png" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #222; box-shadow: 0 0 8px #67350099;" alt="Lion Logo" />
+</div>
+<div style="font-size: 3rem; font-weight: 700; color: rgb(255, 255, 255); text-align: center; letter-spacing: 3px; margin-top: 5px;">NEXUS</div>
+
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#esports">Esports</a></li>
+        <li><a href="#popular">Popular</a></li>
+        <li><button class="btn-accent">Download App</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero-content" id="home">
+    <div class="hero-left">
+      <h1>Turn your passion into wins.<br />Be the player you want to be on Nexus.</h1>
+      <p>
+        Discover tournaments, streaming, and social gaming—all in one place. Play top games, build your profile,
+        and connect instantly with players globally.
+      </p>
+      <div class="download-row">
+        <a href="#home" style="font-weight: 600; color: #ffe77a; font-size: 1.06rem; text-decoration: none;">
+          Start your story with Nexus
+        </a>
+        <a href="#" class="app-btn">
+          <img src="assets/images/playstore.png" alt="Google Play Store" />
+        </a>
+        <a href="#" class="app-btn">
+          <img src="assets/images/appstore.png" alt="App Store" />
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="assets/images/t1.jpg" alt="Nexus App UI" />
+    </div>
+  </div>
+
+  <section id="features" style="max-width: 1100px; margin: 58px auto 0 auto; padding: 0 35px;">
+  <h2 style="text-align: center; font-size: 2.6rem; font-weight:700; color: #fff; margin-bottom: 34px;">
+    Why Choose Nexus?
+  </h2>
+  <div class="features-grid" style="
+    display: grid;
+    grid-template-columns: repeat(3, minmax(240px,1fr));
+    grid-template-rows: repeat(2, minmax(180px, 1fr));
+    gap: 44px;
+    justify-content: center;
+    align-items: center;
+  ">
+    <div class="feature-card" tabindex="0" style="
+      background: #18191b;
+      border-radius: 20px;
+      box-shadow: 0 0 12px 2px #c139ff22, 0 0 2px #b671ff;
+      border: 2.5px solid transparent;
+      padding: 34px 28px 28px 28px;
+      min-height: 190px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.15s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    ">
+      <div style="font-size: 46px; margin-bottom: 20px;">🕹️</div>
+      <div style="font-weight:700; font-size:1.23rem; color:#fff; margin-bottom:7px; margin-top:-10px; letter-spacing:-0.5px;">Public Request Board</div>
+      <div style="font-size:1.06rem; color:#cbc1ef; margin-top:6px; line-height:1.7;">
+        Post and browse requests to find teammates for specific games and activities with ease.
+      </div>
+    </div>
+
+    <div class="feature-card" tabindex="0" style="
+      background: #18191b;
+      border-radius: 20px;
+      box-shadow: 0 0 12px 2px #c139ff22, 0 0 2px #b671ff;
+      border: 2.5px solid transparent;
+      padding: 34px 28px 28px 28px;
+      min-height: 190px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.15s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    ">
+      <div style="font-size: 46px; margin-bottom: 20px;">🔍</div>
+      <div style="font-weight:700; font-size:1.23rem; color:#fff; margin-bottom:7px; margin-top:-10px; letter-spacing:-0.5px;">Intelligent Matching</div>
+      <div style="font-size:1.06rem; color:#cbc1ef; margin-top:6px; line-height:1.7;">
+        Our algorithms pair players based on skill level and preferences for fair competitive matches.
+      </div>
+    </div>
+
+    <div class="feature-card" tabindex="0" style="
+      background: #18191b;
+      border-radius: 20px;
+      box-shadow: 0 0 12px 2px #c139ff22, 0 0 2px #b671ff;
+      border: 2.5px solid transparent;
+      padding: 34px 28px 28px 28px;
+      min-height: 190px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.15s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    ">
+      <div style="font-size: 46px; margin-bottom: 20px;">📊</div>
+      <div style="font-weight:700; font-size:1.23rem; color:#fff; margin-bottom:7px; margin-top:-10px; letter-spacing:-0.5px;">Player Profiles</div>
+      <div style="font-size:1.06rem; color:#cbc1ef; margin-top:6px; line-height:1.7;">
+        View detailed profiles with stats, game library, and live status indicators like online or in-game.
+      </div>
+    </div>
+
+    <div class="feature-card" tabindex="0" style="
+      background: #18191b;
+      border-radius: 20px;
+      box-shadow: 0 0 12px 2px #c139ff22, 0 0 2px #b671ff;
+      border: 2.5px solid transparent;
+      padding: 34px 28px 28px 28px;
+      min-height: 190px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.15s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    ">
+      <div style="font-size: 46px; margin-bottom: 20px;">⚡</div>
+      <div style="font-weight:700; font-size:1.23rem; color:#fff; margin-bottom:7px; margin-top:-10px; letter-spacing:-0.5px;">Real-Time Updates</div>
+      <div style="font-size:1.06rem; color:#cbc1ef; margin-top:6px; line-height:1.7;">
+        Stay informed with instant status changes and live connection updates throughout your gaming session.
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #features .feature-card:hover,
+    #features .feature-card:focus {
+      transform: scale(1.06);
+      border-color: #c139ff;
+      box-shadow: 0 0 38px 5px #c139ff66, 0 0 15px #b671ff77;
+      z-index: 2;
+      outline: none;
+    }
+  </style>
+</section>
+
+<style>
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  grid-template-rows: repeat(2, 1fr);
+  gap: 44px;
+  justify-content: center;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.feature-card {
+  background: #18191b;
+  border-radius: 20px;
+  box-shadow: 0 0 12px 2px #c139ff22, 0 0 2px #b671ff;
+  border: 2.5px solid transparent;
+  padding: 34px 28px 28px 28px;
+  min-height: 190px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform .16s, border-color .3s, box-shadow .3s;
+  position: relative;
+}
+.feature-card:hover,
+.feature-card.selected {
+  transform: scale(1.06);
+  border-color: #c139ff;
+  box-shadow: 0 0 30px 5px #c139ff66, 0 0 15px #b671ff77;
+  z-index: 2;
+}
+.feature-icon {
+  width: 55px;
+  height: 55px;
+  margin-bottom: 18px;
+}
+.feature-title {
+  font-size: 1.26rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  margin-top: -2px;
+  letter-spacing: -.5px;
+}
+.feature-desc {
+  font-size: 1.06rem;
+  color: #cbc1ef;
+  margin-top: 2px;
+  line-height: 1.55;
+}
+@media (max-width: 1050px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 760px;
+    margin-bottom: 14px;
+  }
+}
+@media (max-width: 700px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    max-width: 98vw;
+  }
+  .feature-card {
+    max-width: 98vw;
+  }
+}
+</style>
+
+
+  <div class="testimonial-row">
+    The easiest way to build your team and enter matches is Nexus. Connect instantly—no matter the game size—making
+    competitive gaming simple and fun.
+  </div>
+
+  <section class="esports-section" id="esports">
+    <h2>Esports</h2>
+    <div class="esports-slider">
+      <div class="game-tile">
+        <img src="assets/images/garenafreefire.png" alt="Free Fire" />
+        <div class="game-title">Free Fire</div>
+      </div>
+      <div class="game-tile">
+        <img src="assets/images/brawlstars.png" alt="Brawl Stars" />
+        <div class="game-title">Brawl Stars</div>
+      </div>
+      <div class="game-tile">
+        <img src="assets/images/clashroyal.png" alt="Clash Royale" />
+        <div class="game-title">Clash Royale</div>
+      </div>
+      <div class="game-tile">
+        <img src="assets/images/pubg.png" alt="PUBG Mobile" />
+        <div class="game-title">PUBG Mobile</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="popular-section" id="popular">
+    <h2>Popular Games</h2>
+    <p>More added weekly</p>
+    <div class="popular-grid">
+      <div class="popular-card">
+        <img src="assets/images/garenafreefire.png" alt="Free Fire" />
+        <span class="popular-title">Garena Free Fire</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/brawlstars.png" alt="Brawl Stars" />
+        <span class="popular-title">Brawl Stars</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/clashroyal.png" alt="Clash Royale" />
+        <span class="popular-title">Clash Royale</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/pubg.png" alt="PUBG MOBILE" />
+        <span class="popular-title">PUBG MOBILE</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/callofduty.png" alt="Call of Duty" />
+        <span class="popular-title">Call of Duty</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/clasofclansa.png" alt="Clash of Clans" />
+        <span class="popular-title">Clash of Clans</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/mlbb.jpg" alt="Mobile Legends" />
+        <span class="popular-title">Mobile Legends</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/fornite.png" alt="Fortnite" />
+        <span class="popular-title">Fortnite</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/chess.jpg" alt="Chess Rush" />
+        <span class="popular-title">Chess Rush</span>
+      </div>
+      <div class="popular-card">
+        <img src="assets/images/fifa.jpg" alt="FIFA Soccer" />
+        <span class="popular-title">FIFA Soccer</span>
+      </div>
+    </div>
+    <button class="view-more-btn">View More</button>
+  </section>
+
+  <footer style="background: #232a3b; color: #7b8499; padding: 28px 10px; text-align: center; margin-top: 60px;">
+    &copy; 2025 Nexus. All Rights Reserved.
+  </footer>
+</body>
+</html>
