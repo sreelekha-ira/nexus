@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neon Gaming App - Capstone Replica</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <style>
+    @import "https://unpkg.com/open-props" layer(design.system);
+    @import "https://unpkg.com/open-props/normalize.min.css" layer(demo.support);
+
+    /* Base Styles */
+    body {
+      background: #121624;
+      color: #e5e5f7;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      background: rgba(18, 22, 36, 0.95);
+      padding: 20px 10px;
+      box-shadow: 0 0 20px #9600ff66;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .sidebar .logo {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 20px;
+    }
+
+    .blue-ball, .red-ball {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    .blue-ball {
+      background: #3a54f8;
+      color: #3a54f8;
+    }
+
+    .red-ball {
+      background: #ff44d7;
+      color: #ff44d7;
+    }
+
+    .sidebar a {
+      color: #7e5fff;
+      text-decoration: none;
+      font-size: 1.1em;
+      margin: 15px 0;
+      text-shadow: 0 0 5px #f700ff;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sidebar a:hover {
+      color: #ff44d7;
+    }
+
+    .sidebar .active {
+      color: #ff44d7;
+    }
+
+    .sidebar .bottom-links {
+      margin-top: auto;
+    }
+
+    /* Main Content */
+    main {
+      margin-left: 140px;
+      padding: 20px;
+      width: calc(100% - 140px);
+    }
+
+    /* Top Bar for Feed */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .top-bar h1 {
+      font-size: 1.8em;
+      color: #80ccff;
+      text-shadow: 0 0 10px #4022af60;
+    }
+
+    .top-bar .status {
+      color: #67ffad;
+      font-size: 1em;
+      margin-left: 10px;
+    }
+
+    .top-bar button {
+      background: transparent;
+      border: none;
+      color: #e5e7fa;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+
+    .top-bar .create-btn {
+      background: #7e5fff;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f700ff66;
+      transition: background 0.2s;
+    }
+
+    .top-bar .create-btn:hover {
+      background: #ff44d7;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      background: #161c33;
+      border-radius: 20px;
+      padding: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 0 10px #393de7;
+    }
+
+    .search-bar input {
+      background: transparent;
+      border: none;
+      color: #e5e7fa;
+      flex: 1;
+      font-size: 1em;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filters button {
+      background: #282c43;
+      color: #e5e7fa;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 5px #7e5fff43;
+      transition: background 0.2s;
+    }
+
+    .filters button.active {
+      background: #ff44d7;
+      color: #fff;
+    }
+
+    /* Feed Posts */
+    .feed-post {
+      background: #161c33;
+      border-radius: 20px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px #f7d3ff33;
+      border: 2px solid #393de7;
+      transition: border-color 0.2s;
+    }
+
+    .feed-post:hover {
+      border-color: #ff44d7;
+    }
+
+    .feed-post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .feed-post-avatar {
+      background: #7e5fff;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f700ff66;
+    }
+
+    .feed-post-info {
+      margin-left: 10px;
+    }
+
+    .feed-post-title {
+      font-size: 1.1em;
+      color: #42c0ff;
+    }
+
+    .feed-post-game {
+      font-size: 0.9em;
+      color: #fcc3fc;
+    }
+
+    .feed-post-desc {
+      font-size: 1em;
+      color: #e5e7fa;
+      margin-bottom: 10px;
+    }
+
+    .feed-post-meta {
+      font-size: 0.85em;
+      color: #a0a0a0;
+    }
+
+    .feed-post-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .feed-post-actions button {
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .apply-btn {
+      background: #7e5fff;
+      color: #fff;
+      border: none;
+      box-shadow: 0 0 10px #f700ff66;
+    }
+
+    .apply-btn:hover {
+      background: #ff44d7;
+    }
+
+    .pass-btn {
+      background: #282c43;
+      color: #e5e7fa;
+      border: none;
+      box-shadow: 0 0 5px #7e5fff43;
+    }
+
+    .pass-btn:hover {
+      background: #a00010;
+    }
+
+    /* Random Pairing Button */
+    .random-pair-btn {
+      background: linear-gradient(90deg,#f700ff 30%,#9f73ff 80%);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 15px #7e5fff43;
+      margin: 20px auto;
+      display: block;
+      transition: background 0.2s;
+    }
+
+    .random-pair-btn:hover {
+      background: linear-gradient(90deg,#67ffad,#19d7ff 70%);
+    }
+
+    /* Tournament Carousel - Horizontal Moving Cards */
+    .top-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .top-carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+      height: 100%;
+    }
+
+    .top-card {
+      flex: 0 0 180px;
+      height: 250px;
+      background: #161c33;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #f7d3ff33;
+      border: 2px solid #393de7;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7fa;
+      margin: 0 10px;
+      transition: all 0.5s ease;
+    }
+
+    .top-card.center {
+      transform: scale(1.2);
+      box-shadow: 0 0 30px #ff44d7aa;
+      border-color: #ff44d7;
+      z-index: 10;
+    }
+
+    .top-card img {
+      width: 100%;
+      height: 80%;
+      object-fit: cover;
+      border-bottom: 2px solid #0ef;
+    }
+
+    .top-card .title {
+      font-size: 1em;
+      color: #42c0ff;
+      margin-top: 10px;
+      text-shadow: 0 0 5px #4022af;
+    }
+
+    /* Arrow Bars */
+    .arrow-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 23;
+      background: rgba(30,35,64,0.93);
+      border-radius: 30px;
+      width: 54px;
+      height: 80px;
+      box-shadow: 0 0 24px #9600ff66;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.2s;
+    }
+
+    .arrow-bar:hover {
+      background: #282c43;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow-bar.left { left: 0; }
+    .arrow-bar.right { right: 0; }
+    .arrow-bar svg {
+      width: 36px;
+      height: 36px;
+      fill: #7e5fff;
+      filter: drop-shadow(0 0 8px #f700ffdd);
+    }
+
+    /* Match Requests */
+    .match-requests {
+      margin-bottom: 40px;
+    }
+
+    .carousel-wrapper {
+      margin: 20px auto;
+      max-width: 800px;
+      position: relative;
+      padding: 10px 90px;
+      background: linear-gradient(90deg,#261043 20%,#1a1b2b 80%);
+      border-radius: 38px;
+      box-shadow: 0 0 36px #7e5fff55, 0 0 6px #3a54f8;
+      overflow: hidden;
+    }
+
+    .match-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 30px;
+      padding-bottom: 12px;
+    }
+
+    .match-card {
+      background: #161c33;
+      border-radius: 26px;
+      box-shadow: 0 0 19px #f7d3ff33;
+      min-width: 240px;
+      max-width: 240px;
+      padding: 26px 18px 21px 18px;
+      text-align: center;
+      color: #e5e7fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      border: 3px solid #393de7;
+      transition: border-color .2s, transform 0.3s;
+    }
+
+    .match-card:hover {
+      border-color: #ff44d7;
+      transform: scale(1.05);
+    }
+
+    .match-card img {
+      width: 130px;
+      border-radius: 13px;
+      margin-bottom: 19px;
+      box-shadow: 0 0 15px #ac7cff88;
+      border: 3px solid #0ef;
+    }
+
+    .match-title {
+      font-size: 1.13em;
+      font-weight: 600;
+      color: #42c0ff;
+      margin-bottom: 3px;
+    }
+
+    .match-desc { font-size: 1em; margin-bottom: 9px; }
+    .match-details { font-size: 0.92em; color: #fcc3fc; margin-bottom: 7px; }
+    .accept-btn, .decline-btn {
+      font-size: 1em;
+      margin: 5px 9px 0 0;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 21px;
+      font-weight: bold;
+      cursor: pointer;
+      background: linear-gradient(90deg,#f700ff 30%,#9f73ff 80%);
+      color: #fff;
+      box-shadow: 0 2px 8px #7e5fff43;
+      transition: background .18s;
+    }
+    .accept-btn:hover { background:linear-gradient(90deg,#67ffad,#19d7ff 70%) }
+    .decline-btn {
+      background: linear-gradient(90deg,#444,#a0a0a0 80%);
+      color: #fff;
+    }
+    .decline-btn:hover { background:linear-gradient(90deg,#a00010,#444) }
+    ::-webkit-scrollbar { height: 8px; background: #19182a;}
+    ::-webkit-scrollbar-thumb {background: #6442cc;border-radius:9px;}
+
+    /* Live Matches */
+    .live-matches {
+      margin-bottom: 40px;
+    }
+
+    .live-match-card {
+      background: #161c33;
+      border-radius: 26px;
+      box-shadow: 0 0 19px #f7d3ff33;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 3px solid #393de7;
+      transition: border-color .2s, transform 0.3s;
+    }
+
+    .live-match-card:hover {
+      border-color: #ff44d7;
+      transform: scale(1.02);
+    }
+
+    .live-match-title {
+      font-size: 1.1em;
+      color: #42c0ff;
+    }
+
+    .live-match-desc {
+      color: #fcc3fc;
+      font-size: 0.95em;
+    }
+
+    .play-btn {
+      background: linear-gradient(90deg,#f700ff 30%,#9f73ff 80%);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #7e5fff43;
+    }
+
+    /* Games - Bloom Effect */
+    @keyframes slide-in {
+      from {
+        scale: .85;
+        rotate: calc((var(--side, 1) * (5deg * var(--amp, 1))));
+        opacity: 0.5;
+      }
+      to {
+        scale: 1;
+        rotate: 0;
+        opacity: 1;
+      }
+    }
+
+    .games {
+      --cols: 2;
+      display: grid;
+      grid-template-columns: repeat(var(--cols), minmax(0, var(--size-content-1)));
+      gap: var(--size-5);
+      padding: var(--size-5);
+      place-items: start;
+
+      @media (width >= 720px) { --cols: 4 }
+      @media (width >= 1200px) { --cols: 6 }
+      @media (width >= 1920px) { --cols: 8 }
+
+      & > .card-animation-layer {
+        display: grid;
+        gap: var(--size-2);
+        cursor: pointer;
+
+        &:nth-of-type(2n + 1) { transform-origin: 25vw 100%; --side: -1; }
+        &:nth-of-type(2n) { transform-origin: -25vw 100%; --side: 1; }
+
+        @media (width >= 720px) {
+          &:nth-of-type(4n + 1) { transform-origin: 50vw 100%; --side: -1; --amp: 2; }
+          &:nth-of-type(4n + 2) { transform-origin: 25vw 100%; --side: -1; }
+          &:nth-of-type(4n + 3) { transform-origin: -25vw 100%; --side: 1 }
+          &:nth-of-type(4n) { transform-origin: -50vw 100%; --side: 1; --amp: 2; }
+        }
+
+        @media (width >= 1200px) {
+          &:nth-of-type(6n + 1) { transform-origin: 75vw 100%; --side: -1; --amp: 3; }
+          &:nth-of-type(6n + 2) { transform-origin: 50vw 100%; --side: -1; --amp: 2; }
+          &:nth-of-type(6n + 3) { transform-origin: 25vw 100%; --side: -1; }
+          &:nth-of-type(6n + 4) { transform-origin: -25vw 100%; --side: 1; }
+          &:nth-of-type(6n + 5) { transform-origin: -50vw 100%; --side: 1; --amp: 2; }
+          &:nth-of-type(6n) { transform-origin: -75vw 100%; --side: 1; --amp: 3; }
+        }
+
+        @media (width >= 1920px) {
+          &:nth-of-type(8n + 1) { transform-origin: 100vw 100%; --side: -1; --amp: 4; }
+          &:nth-of-type(8n + 2) { transform-origin: 75vw 100%; --side: -1; --amp: 3; }
+          &:nth-of-type(8n + 3) { transform-origin: 50vw 100%; --side: -1; --amp: 2; }
+          &:nth-of-type(8n + 4) { transform-origin: 25vw 100%; --side: -1; }
+          &:nth-of-type(8n + 5) { transform-origin: -25vw 100%; --side: 1; }
+          &:nth-of-type(8n + 6) { transform-origin: -50vw 100%; --side: 1; --amp: 2; }
+          &:nth-of-type(8n + 7) { transform-origin: -75vw 100%; --side: 1; --amp: 3; }
+          &:nth-of-type(8n) { transform-origin: -100vw 100%; --side: 1; --amp: 4; }
+        }
+      }
+    }
+
+    .game-card {
+      background: var(--surface-2);
+      border: 1px solid color-mix(in srgb, var(--surface-4), #0000 50%);
+      padding-block: var(--size-3) var(--size-2);
+      padding-inline: var(--size-3);
+      border-radius: var(--radius-4);
+      box-shadow: var(--shadow-4);
+      transition: transform 0.2s;
+
+      &.landscape img { aspect-ratio: var(--ratio-landscape) }
+      &.portrait img { aspect-ratio: var(--ratio-portrait) }
+      &.square img { aspect-ratio: var(--ratio-square) }
+
+      & > p {
+        color: var(--text-2);
+        line-clamp: 2;
+      }
+
+      & > :is(a, p) {
+        font-size: var(--font-size-1);
+        line-height: 1.25;
+      }
+
+      img {
+        background-color: var(--surface-3);
+        border-radius: var(--radius-3);
+        margin-block-end: var(--size-2);
+      }
+
+      @media (prefers-color-scheme: light) {
+        background: white;
+      }
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    .game-title {
+      max-inline-size: 100%;
+      text-align: center;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .card-animation-layer {
+          animation: slide-in 0.5s ease-out both;
+          animation-timeline: view();
+          animation-range: entry 0% cover 50%;
+        }
+      }
+    }
+
+    /* Random Pair Box */
+    .random-pair-box {
+      background: #161c33;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 0 15px #f7d3ff33;
+      border: 2px solid #393de7;
+    }
+
+    .random-pair-box h3 {
+      color: #80ccff;
+      margin-bottom: 15px;
+    }
+
+    .random-pair-box select {
+      background: #282c43;
+      color: #e5e7fa;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .random-pair-box button {
+      background: #7e5fff;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f700ff66;
+      border: none;
+      cursor: pointer;
+    }
+
+    .random-pair-box button:hover {
+      background: #ff44d7;
+    }
+
+    /* Messages Section */
+    .messages-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .message-card {
+      background: #161c33;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 0 15px #f7d3ff33;
+      border: 2px solid #393de7;
+      transition: border-color 0.2s;
+    }
+
+    .message-card:hover {
+      border-color: #ff44d7;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .message-avatar {
+      background: #7e5fff;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f700ff66;
+    }
+
+    .message-info {
+      margin-left: 10px;
+    }
+
+    .message-sender {
+      font-size: 1.1em;
+      color: #42c0ff;
+    }
+
+    .message-time {
+      font-size: 0.85em;
+      color: #a0a0a0;
+      margin-left: auto;
+    }
+
+    .message-content {
+      font-size: 1em;
+      color: #e5e7fa;
+      margin-bottom: 10px;
+    }
+
+    .reply-btn {
+      background: #282c43;
+      color: #e5e7fa;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 5px #7e5fff43;
+    }
+
+    .reply-btn:hover {
+      background: #ff44d7;
+      color: #fff;
+    }
+
+    /* Connections Section */
+    .connections-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .connection-card {
+      background: #161c33;
+      border-radius: 20px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 15px #f7d3ff33;
+      border: 2px solid #393de7;
+      transition: border-color 0.2s, transform 0.3s;
+    }
+
+    .connection-card:hover {
+      border-color: #ff44d7;
+      transform: scale(1.05);
+    }
+
+    .connection-avatar {
+      background: #7e5fff;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f700ff66;
+      margin: 0 auto 10px;
+    }
+
+    .connection-name {
+      font-size: 1.1em;
+      color: #42c0ff;
+    }
+
+    .connection-status {
+      font-size: 0.9em;
+      color: #fcc3fc;
+    }
+
+    .connection-actions {
+      margin-top: 10px;
+    }
+
+    .connection-actions button {
+      background: #282c43;
+      color: #e5e7fa;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 5px #7e5fff43;
+      margin: 0 5px;
+    }
+
+    .connection-actions button:hover {
+      background: #ff44d7;
+      color: #fff;
+    }
+
+    /* Profile Section */
+    .profile-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #241a44;
+      box-shadow: 0 0 15px 3px #36006cff;
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .profile-stats {
+      flex: 1 1 200px;
+      background: #362d59;
+      border-radius: 12px;
+      padding: 16px;
+      min-width: 200px;
+      color: #6af9c4;
+    }
+
+    .profile-stats h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #54ccb3;
+      padding-bottom: 7px;
+    }
+
+    .profile-stats .stat {
+      font-size: 1.1em;
+      margin: 10px 0;
+    }
+
+    .profile-stats img {
+      width: 100%;
+      border-radius: 50%;
+      border: 3px solid #4dbda9;
+      margin-bottom: 16px;
+    }
+
+    .match-requests {
+      flex: 1 1 400px;
+      background: #291d57;
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 400px;
+      color: #d2bdf4;
+    }
+
+    .match-requests h3 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #caa2ff;
+      border-bottom: 2px solid #bda9f7;
+      padding-bottom: 8px;
+    }
+
+    .challenge {
+      background: #3e2d71;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      min-height: 120px;
+      overflow-y: auto;
+      color: #faf6ff;
+      box-shadow: inset 0 0 15px #a27afb;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 26px;
+      justify-content: flex-start;
+    }
+
+    .btn {
+      padding: 12px 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.1em;
+      transition: background-color 0.25s ease;
+      color: white;
+      box-shadow: 0 0 14px #9d81e9;
+    }
+
+    .btn.accept {
+      background-color: #7a54ff;
+    }
+
+    .btn.accept:hover {
+      background-color: #b491ff;
+    }
+
+    .btn.decline {
+      background-color: #9f486f;
+    }
+
+    .btn.decline:hover {
+      background-color: #cf71a4;
+    }
+
+    .card-tiers {
+      flex: 1 1 160px;
+      background: #3c2c5b;
+      border-radius: 12px;
+      padding: 18px;
+      color: #f7ecff;
+      min-width: 160px;
+    }
+
+    .card-tiers h3 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-weight: 700;
+      font-size: 1.1em;
+      color: #ecd3ff;
+      border-bottom: 2px solid #7644cc;
+      padding-bottom: 7px;
+    }
+
+    .tier-item {
+      margin-bottom: 12px;
+      font-size: 1.05em;
+      padding: 10px;
+      background-color: #5b4785;
+      border-radius: 8px;
+      box-shadow: 0 0 7px #9b78ff;
+    }
+
+    .challenge::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .challenge::-webkit-scrollbar-thumb {
+      background-color: #8e68f9;
+      border-radius: 8px;
+    }
+
+    /* Settings Section */
+    .settings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .setting-item {
+      background: #161c33;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 0 15px #f7d3ff33;
+      border: 2px solid #393de7;
+      transition: border-color 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .setting-item:hover {
+      border-color: #ff44d7;
+    }
+
+    .setting-label {
+      font-size: 1.1em;
+      color: #42c0ff;
+    }
+
+    .setting-control {
+      background: #282c43;
+      color: #e5e7fa;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 5px #7e5fff43;
+    }
+
+    /* Discover Players */
+    .discover-players {
+      margin-bottom: 40px;
+    }
+
+    .players-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .player-card {
+      background: #161c33;
+      border-radius: 20px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 15px #f7d3ff33;
+      border: 2px solid #393de7;
+      transition: border-color 0.2s, transform 0.3s;
+    }
+
+    .player-card:hover {
+      border-color: #ff44d7;
+      transform: scale(1.05);
+    }
+
+    .player-avatar {
+      background: #7e5fff;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f700ff66;
+      margin: 0 auto 10px;
+    }
+
+    .player-name {
+      font-size: 1.1em;
+      color: #42c0ff;
+    }
+
+    .player-location {
+      font-size: 0.9em;
+      color: #a0a0a0;
+    }
+
+    .player-desc {
+      font-size: 0.95em;
+      color: #e5e7fa;
+      margin: 5px 0;
+    }
+
+    .player-games {
+      font-size: 0.85em;
+      color: #fcc3fc;
+      margin-bottom: 10px;
+    }
+
+    .view-profile-btn {
+      background: #7e5fff;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #f700ff66;
+      border: none;
+      cursor: pointer;
+    }
+
+    .view-profile-btn:hover {
+      background: #ff44d7;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .sidebar {
+        width: 80px;
+      }
+      main {
+        margin-left: 100px;
+        width: calc(100% - 100px);
+      }
+      .carousel-wrapper {
+        max-width: 98vw;
+        padding: 7px 38px;
+      }
+      .match-card {
+        min-width: 210px;
+        max-width: 210px;
+      }
+      .arrow-bar {
+        width: 36px;
+        height: 52px;
+      }
+      .top-carousel-wrapper {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="logo">
+      <div class="blue-ball"></div>
+      <div class="red-ball"></div>
+    </div>
+    <a href="#discover" class="active"> Discover</a>
+    <a href="#feed"> Feed</a>
+    <a href="#connections"> Connections</a>
+    <a href="#messages">Messages</a>
+    <div class="bottom-links">
+      <a href="#profile">👤 Profile</a>
+      <a href="#settings">⚙️ Settings</a>
+      <a href="#logout">🚪 Logout</a>
+    </div>
+  </nav>
+
+  <main id="discover">
+    <!-- Tournaments -->
+    <section class="top-carousel-wrapper">
+      <h2 style="text-align:left;font-size:1.5em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Tournaments</h2>
+      <div class="top-carousel" id="top-carousel">
+        <!-- Cards by JS -->
+      </div>
+      <div class="arrow-bar left" onclick="moveTopCarousel(-1)">
+        <svg><polyline points="28,8 10,24 28,40" stroke="#e6e6fa" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="arrow-bar right" onclick="moveTopCarousel(1)">
+        <svg><polyline points="12,8 30,24 12,40" stroke="#e6e6fa" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </section>
+
+    <!-- Match Requests -->
+    <section class="match-requests">
+      <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Match Requests</h2>
+      <div class="carousel-wrapper">
+        <div class="arrow-bar left" onclick="moveMatchCarousel(-1)">
+          <svg><polyline points="28,8 10,24 28,40" stroke="#e6e6fa" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="match-carousel" id="match-carousel">
+          <!-- Cards -->
+        </div>
+        <div class="arrow-bar right" onclick="moveMatchCarousel(1)">
+          <svg><polyline points="12,8 30,24 12,40" stroke="#e6e6fa" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Matches -->
+    <section class="live-matches">
+      <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Live Matches</h2>
+      <div class="live-match-card">
+        <div>
+          <div class="live-match-title">Team A vs. B</div>
+          <div class="live-match-desc">Fortress Assault - Streaming Now!</div>
+        </div>
+        <button class="play-btn">&#9654;</button>
+      </div>
+      <div class="live-match-card">
+        <div>
+          <div class="live-match-title">Solo Duel: Player X vs Y</div>
+          <div class="live-match-desc">Arena Battle - Live!</div>
+        </div>
+        <button class="play-btn">&#9654;</button>
+      </div>
+    </section>
+
+    <!-- Games -->
+    <section class="games">
+      <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Games</h2>
+      <!-- Bloom cards -->
+      <div class="random-pair-box">
+        <h3>Find Random Pair for Game</h3>
+        <select id="game-select-games">
+          <option>Select Game</option>
+          <option>League of Legends</option>
+          <option>Valorant</option>
+          <option>Fortnite</option>
+        </select>
+        <select id="skill-select-games">
+          <option>Select Skill Level</option>
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+        <button onclick="findRandomPair('games')">Find Pair</button>
+      </div>
+    </section>
+
+    <!-- Discover Players -->
+    <section class="discover-players">
+      <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Discover Players</h2>
+      <p>Find and connect with gamers worldwide</p>
+      <p>6 players found</p>
+      <div class="search-bar">
+        <span>&#128269;</span>
+        <input type="text" placeholder="Search players by name or gamertag...">
+      </div>
+      <div class="filters">
+        <label>Gender <select><option>All genders</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+        <label>Language <select><option>All languages</option><option>English</option><option>Spanish</option><option>French</option></select></label>
+        <label>Game <select><option>All games</option><option>League of Legends</option><option>Valorant</option><option>Fortnite</option></select></label>
+        <label>Distance <select><option>Global</option><option>Local</option><option>Regional</option></select></label>
+      </div>
+      <div class="players-list">
+        <div class="player-card">
+          <div class="player-avatar">AM</div>
+          <div class="player-name">Hhhh</div>
+          <button class="view-profile-btn" onclick="viewProfile('Hhhh')">View Profile</button>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">HL</div>
+          <div class="player-name">vvv</div>
+          <button class="view-profile-btn" onclick="viewProfile('vvv')">View Profile</button>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">ZM</div>
+          <div class="player-name">lll</div>
+          <button class="view-profile-btn" onclick="viewProfile('lll')">View Profile</button>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">JP</div>
+          <div class="player-name">JordanPro</div>
+          <div class="player-location">Seattle, WA</div>
+          <div class="player-desc">MOBA enthusiast and tournament organizer</div>
+          <div class="player-games">Dota 2 • League of Legends • Heroes of the Storm</div>
+          <button class="view-profile-btn" onclick="viewProfile('JordanPro')">View Profile</button>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">SR</div>
+          <div class="player-name">SamTheSniper</div>
+          <div class="player-location">Austin, TX</div>
+          <div class="player-desc">Casual gamer, loves team-based strategy games</div>
+          <div class="player-games">League of Legends • Overwatch 2 • Rocket League</div>
+          <button class="view-profile-btn" onclick="viewProfile('SamTheSniper')">View Profile</button>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">AC</div>
+          <div class="player-name">AlexGamer</div>
+          <div class="player-location">San Francisco, CA</div>
+          <div class="player-desc">Competitive FPS player looking for ranked teammates</div>
+          <div class="player-games">Valorant • CS2 • Apex Legends</div>
+          <button class="view-profile-btn" onclick="viewProfile('AlexGamer')">View Profile</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main id="feed" style="display: none;">
+    <div class="top-bar">
+      <h1>Match Feed <span class="status">&#128267; Live</span></h1>
+      <div>
+        <button title="Hidden">&#128065;&#8205;&#128488;</button>
+        <button title="Refresh">&#128260;</button>
+        <button class="create-btn">+ Create</button>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <span>&#128269;</span>
+      <input type="text" placeholder="Search games, descriptions, or gamer tags...">
+    </div>
+
+    <div class="filters">
+      <button onclick="filterFeed('all')">All</button>
+      <button onclick="filterFeed('teammates')">Looking for Teammates</button>
+      <button onclick="filterFeed('challenge')">Challenge</button>
+      <button onclick="filterFeed('squad')">Squad</button>
+    </div>
+
+    <div class="feed-posts" id="feed-posts">
+      <!-- Posts by JS -->
+    </div>
+
+    <button class="random-pair-btn" onclick="randomPairing()">Random Pairing</button>
+  </main>
+
+  <main id="connections" style="display: none;">
+    <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Connections</h2>
+    <div class="random-pair-box">
+      <h3>Find Random Pair</h3>
+      <select id="game-select-connections">
+        <option>Select Game</option>
+        <option>League of Legends</option>
+        <option>Valorant</option>
+        <option>Fortnite</option>
+      </select>
+      <select id="skill-select-connections">
+        <option>Select Skill Level</option>
+        <option>Beginner</option>
+        <option>Intermediate</option>
+        <option>Advanced</option>
+      </select>
+      <button onclick="findRandomPair('connections')">Find Pair</button>
+    </div>
+    <div class="connections-list">
+      <!-- Connection cards by JS -->
+    </div>
+  </main>
+
+  <main id="messages" style="display: none;">
+    <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Messages</h2>
+    <div class="messages-list">
+      <!-- Message cards by JS -->
+    </div>
+  </main>
+
+  <main id="profile" style="display: none;">
+    <div class="profile-container">
+      <div class="profile-stats">
+        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Profile Picture" />
+        <h3>Player Stats</h3>
+        <div class="stat">Rank: <strong>#12</strong></div>
+        <div class="stat">Wins: <strong>45</strong></div>
+        <div class="stat">K/D: <strong>2.3</strong></div>
+        <div class="stat">XP: <strong>8900</strong></div>
+      </div>
+
+      <div class="match-requests">
+        <h3>Match Requests</h3>
+        <div class="challenge" id="challengeBox" tabindex="0">
+          New Challenge:<br />
+          <strong>Team Deathmatch</strong>
+        </div>
+        <div class="buttons">
+          <button class="btn accept" onclick="alert('Challenge Accepted')">Accept</button>
+          <button class="btn decline" onclick="alert('Challenge Declined')">Decline</button>
+        </div>
+      </div>
+
+      <div class="card-tiers">
+        <h3>Card Collection Tiers</h3>
+        <div class="tier-item">Bronze Tier: <strong>12/20</strong></div>
+        <div class="tier-item">Silver Tier: <strong>8/15</strong></div>
+        <div class="tier-item">Gold Tier: <strong>3/10</strong></div>
+      </div>
+    </div>
+  </main>
+
+  <main id="settings" style="display: none;">
+    <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Settings</h2>
+    <div class="settings-list">
+      <div class="setting-item">
+        <div class="setting-label">Dark Mode</div>
+        <button class="setting-control" onclick="toggleDarkMode()">Toggle</button>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">Notifications</div>
+        <button class="setting-control" onclick="toggleNotifications()">On</button>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">Privacy</div>
+        <button class="setting-control" onclick="togglePrivacy()">Public</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sidebar Navigation
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    const sections = {
+      discover: document.getElementById('discover'),
+      feed: document.getElementById('feed'),
+      connections: document.getElementById('connections'),
+      messages: document.getElementById('messages'),
+      profile: document.getElementById('profile'),
+      settings: document.getElementById('settings')
+    };
+
+    sidebarLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.href.split('#')[1];
+        if (target === 'logout') {
+          alert('Logging out...');
+          return;
+        }
+        sidebarLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        Object.values(sections).forEach(sec => sec.style.display = 'none');
+        if (sections[target]) {
+          sections[target].style.display = 'block';
+        }
+      });
+    });
+
+    // Tournament Carousel Data
+    const topCards = [
+      { img: 'https://i.pinimg.com/474x/af/22/2c/af222cef9b3b24882570bdd30882ec60.jpg', title: 'TORNAMENT 1' },
+      { img: 'https://i.pinimg.com/736x/a8/4a/38/a84a3835cd7d65bcbc094ea93ff07efa.jpg', title: 'TORNAMENT 2' },
+      { img: 'https://thumbs.dreamstime.com/b/valerie-cyberpunk-vertical-k-valerie-cyberpunk-neon-vertical-k-mobile-wallpaper-320503484.jpg', title: 'TORNAMENT 3' },
+      { img: 'https://img.freepik.com/premium-photo/abstract-cyberpunk-technology-gaming-neon-theme-background-mobile-vertical-wallpaper-ai-generated-image_1087980-5678.jpg?w=360', title: 'TORNAMENT 4' },
+      { img: 'https://cdn.displate.com/artwork/270x380/2023-09-07/a8ac9f77d879b280ce857942b3de6001_52a705cdc4c83f2f24fae30de73238d4.jpg', title: 'TORNAMENT 5' },
+      { img: 'https://thumbs.dreamstime.com/b/valerie-cyberpunk-vertical-k-neon-mobile-wallpaper-320503609.jpg', title: 'TORNAMENT 6' },
+    ];
+
+    const topCarousel = document.getElementById('top-carousel');
+    let currentIndex = 0;
+
+    function renderTopCarousel() {
+      topCarousel.innerHTML = '';
+      topCards.forEach((card, i) => {
+        const item = document.createElement('div');
+        item.className = 'top-card';
+        item.innerHTML = `
+          <img src="${card.img}" alt="tournament">
+          <div class="title">${card.title}</div>
+        `;
+        topCarousel.appendChild(item);
+      });
+      updateCarouselPosition();
+    }
+
+    function updateCarouselPosition() {
+      const cardWidth = 200;
+      const offset = -(currentIndex * cardWidth) + ((window.innerWidth - 180) / 2 - cardWidth);
+      topCarousel.style.transform = `translateX(${offset}px)`;
+      Array.from(topCarousel.children).forEach((card, i) => {
+        card.classList.remove('center');
+        if (i === currentIndex) {
+          card.classList.add('center');
+        }
+      });
+    }
+
+    function moveTopCarousel(dir) {
+      currentIndex += dir;
+      if (currentIndex < 0) currentIndex = topCards.length - 1;
+      if (currentIndex >= topCards.length) currentIndex = 0;
+      updateCarouselPosition();
+    }
+
+    renderTopCarousel();
+    window.addEventListener('resize', updateCarouselPosition);
+
+    // Match Requests Data
+    const matches = [
+      {
+        img: "https://static.vecteezy.com/system/resources/previews/028/108/958/large_2x/3d-esport-gamer-character-for-game-avatar-ai-generated-photo.jpg",
+        title: "Capture the Flag",
+        desc: "Squad needed for CTF.",
+        details: "K/D 1.9 • 6700XP",
+      },
+      {
+        img: "https://cdn.pixabay.com/photo/2016/08/20/05/39/avatar-1606916_1280.png",
+        title: "Battle Royale",
+        desc: "Battling for Platinum Tier.",
+        details: "K/D 4.0 • 10120XP",
+      },
+      {
+        img: "https://cdn.pixabay.com/photo/2017/01/06/19/15/avatar-1958246_1280.png",
+        title: "1v1 Arena",
+        desc: "Solo Ranked Challenge!",
+        details: "K/D 3.1 • 7500XP",
+      },
+      {
+        img: "https://cdn.pixabay.com/photo/2014/04/03/10/32/businessman-312822_1280.png",
+        title: "Deathmatch",
+        desc: "New Team Deathmatch Request!",
+        details: "K/D 2.2 • 8900XP",
+      },
+      {
+        img: "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_1280.png",
+        title: "Squad Skirmish",
+        desc: "Hardcore team match.",
+        details: "K/D 2.5 • 8200XP",
+      }
+    ];
+
+    const matchCarousel = document.getElementById('match-carousel');
+    matches.forEach((m) => {
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      card.innerHTML = `
+        <img src="${m.img}" alt="game card"/>
+        <div class="match-title">${m.title}</div>
+        <div class="match-desc">${m.desc}</div>
+        <div class="match-details">${m.details}</div>
+        <button class="accept-btn">Accept</button>
+        <button class="decline-btn">Decline</button>
+      `;
+      matchCarousel.appendChild(card);
+    });
+
+    function moveMatchCarousel(dir) {
+      const scrollAmount = 270;
+      matchCarousel.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    }
+
+    // Games Data
+    const gamesData = [
+      { img: 'https://cdn.mos.cms.futurecdn.net/JhNtmh6bDM6F9LXiAWSLUQ.jpg', title: 'Reaver' },
+      { img: 'https://www.gameart2d.com/uploads/3/0/9/1/30917885/sci-fi-tcg-template-4_orig.png', title: 'Sci-Fi TCG' },
+      { img: 'https://i.etsystatic.com/54229888/r/il/d60743/6214731330/il_570xN.6214731330_799q.jpg', title: 'Futuristic Card' },
+      { img: 'https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000082492/775d29e8e95d84b2890eda7958a2367fd56d6ffcfee95a5227ade62fde8989ec', title: 'Metroplex Zero' },
+      { img: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1533420/capsule_616x353.jpg?t=1729099604', title: 'Neon White' },
+      { img: 'https://m.media-amazon.com/images/I/71RvmdQgIFL.jpg', title: 'Cyberpunk RED' },
+      { img: 'https://4kwallpapers.com/images/wallpapers/motorcycle-cyberpunk-2077-neon-art-neon-lights-triangles-4200x3000-7289.jpg', title: 'Cyber Bike' },
+      { img: 'https://i.pinimg.com/736x/a8/4a/38/a84a3835cd7d65bcbc094ea93ff07efa.jpg', title: 'Samurai' },
+    ];
+
+    const gamesSection = document.querySelector('.games');
+    gamesData.forEach((g, i) => {
+      const layer = document.createElement('div');
+      layer.className = 'card-animation-layer';
+      layer.onclick = () => showGameDetails(g.title);
+      const card = document.createElement('div');
+      card.className = 'game-card';
+      card.innerHTML = `
+        <img src="${g.img}" alt="game">
+        <div class="game-title">${g.title}</div>
+      `;
+      layer.appendChild(card);
+      gamesSection.appendChild(layer);
+    });
+
+    function showGameDetails(title) {
+      alert(`Game Details for ${title}: Description, Mates, etc.`);
+    }
+
+    // Feed Posts Data
+    const feedPostsData = [
+      {
+        avatar: 'LL',
+        title: 'III',
+        game: 'League of Legends &#128293; 1v1',
+        desc: 'Looking for Teammates',
+        meta: '6 days ago &#8226; NA Central',
+        content: 'kkkkkmmmmmmmmmmmmmmmmm',
+        tag: 'teammates'
+      },
+      {
+        avatar: 'VV',
+        title: 'Vvv',
+        game: 'Valorant &#128293; 1v1',
+        desc: 'Challenge',
+        meta: '7 days ago &#8226; Asia',
+        content: '...............',
+        tag: 'challenge'
+      },
+      {
+        avatar: 'GG',
+        title: 'GamerPro',
+        game: 'Fortnite &#128293; Squad',
+        desc: 'Squad',
+        meta: '2 days ago &#8226; EU West',
+        content: 'Need good players for ranked!',
+        tag: 'squad'
+      },
+      {
+        avatar: 'HH',
+        title: 'Hero',
+        game: 'Dota 2 &#128293; Team',
+        desc: 'Looking for Teammates',
+        meta: '1 day ago &#8226; Global',
+        content: 'Join my team!',
+        tag: 'teammates'
+      },
+    ];
+
+    const feedPosts = document.getElementById('feed-posts');
+    function renderFeedPosts(filter = 'all') {
+      feedPosts.innerHTML = '';
+      feedPostsData.filter(p => filter === 'all' || p.tag === filter).forEach(p => {
+        const post = document.createElement('div');
+        post.className = 'feed-post';
+        post.innerHTML = `
+          <div class="feed-post-header">
+            <div class="feed-post-avatar">${p.avatar}</div>
+            <div class="feed-post-info">
+              <div class="feed-post-title">${p.title}</div>
+              <div class="feed-post-game">${p.game}</div>
+            </div>
+            <button class="feed-post-desc">${p.desc}</button>
+          </div>
+          <div class="feed-post-content">${p.content}</div>
+          <div class="feed-post-meta">${p.meta}</div>
+          <div class="feed-post-actions">
+            <button class="apply-btn">Apply to Match</button>
+            <button class="pass-btn">Pass</button>
+          </div>
+        `;
+        feedPosts.appendChild(post);
+      });
+    }
+
+    renderFeedPosts();
+
+    function filterFeed(tag) {
+      const filterButtons = document.querySelectorAll('.filters button');
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(filterButtons).find(btn => btn.textContent.toLowerCase().includes(tag) || (tag === 'all' && btn.textContent === 'All'));
+      if (activeBtn) activeBtn.classList.add('active');
+      renderFeedPosts(tag);
+    }
+
+    // Random Pairing Function
+    function randomPairing() {
+      const randomIndex = Math.floor(Math.random() * feedPostsData.length);
+      const paired = feedPostsData[randomIndex];
+      alert(`Paired randomly with: ${paired.title} in ${paired.game}! Starting match...`);
+    }
+
+    function findRandomPair(section) {
+      const gameSelect = document.getElementById(`game-select-${section}`);
+      const skillSelect = document.getElementById(`skill-select-${section}`);
+      const game = gameSelect.value;
+      const skill = skillSelect.value;
+      if (game !== 'Select Game' && skill !== 'Select Skill Level') {
+        alert(`Found random pair for ${game} at ${skill} level!`);
+      } else {
+        alert('Please select game and skill level.');
+      }
+    }
+
+    // Connections Data
+    const connectionsData = [
+      { avatar: 'A', name: 'Alice', status: 'Online' },
+      { avatar: 'B', name: 'Bob', status: 'Offline' },
+      { avatar: 'C', name: 'Charlie', status: 'In Game' },
+      { avatar: 'D', name: 'Dana', status: 'Online' },
+      { avatar: 'E', name: 'Eve', status: 'Offline' },
+    ];
+
+    const connectionsList = document.querySelector('.connections-list');
+    connectionsData.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'connection-card';
+      card.innerHTML = `
+        <div class="connection-avatar">${c.avatar}</div>
+        <div class="connection-name">${c.name}</div>
+        <div class="connection-status">${c.status}</div>
+        <div class="connection-actions">
+          <button onclick="messageConnection('${c.name}')">Message</button>
+          <button onclick="removeConnection('${c.name}')">Remove</button>
+        </div>
+      `;
+      connectionsList.appendChild(card);
+    });
+
+    function messageConnection(name) {
+      alert(`Messaging ${name}...`);
+    }
+
+    function removeConnection(name) {
+      alert(`Removed ${name} from connections.`);
+    }
+
+    // Messages Data
+    const messagesData = [
+      { avatar: 'A', sender: 'Alice', time: '5 min ago', content: 'Hey, want to team up for the tournament?' },
+      { avatar: 'B', sender: 'Bob', time: '1 hour ago', content: 'GG on the last match!' },
+      { avatar: 'C', sender: 'Charlie', time: 'Yesterday', content: 'Check out this new game mode.' },
+      { avatar: 'D', sender: 'Dana', time: '2 hours ago', content: 'Ready for the next challenge?' },
+    ];
+
+    const messagesList = document.querySelector('.messages-list');
+    messagesData.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'message-card';
+      card.innerHTML = `
+        <div class="message-header">
+          <div class="message-avatar">${m.avatar}</div>
+          <div class="message-info">
+            <div class="message-sender">${m.sender}</div>
+          </div>
+          <div class="message-time">${m.time}</div>
+        </div>
+        <div class="message-content">${m.content}</div>
+        <button class="reply-btn" onclick="replyToMessage('${m.sender}')">Reply</button>
+      `;
+      messagesList.appendChild(card);
+    });
+
+    function replyToMessage(sender) {
+      alert(`Replying to ${sender}...`);
+    }
+
+    // Settings Functions
+    function toggleDarkMode() {
+      alert('Toggling Dark Mode...');
+    }
+
+    function toggleNotifications() {
+      alert('Toggling Notifications...');
+    }
+
+    function togglePrivacy() {
+      alert('Toggling Privacy...');
+    }
+
+    // View Profile
+    function viewProfile(name) {
+      alert(`Viewing profile of ${name}...`);
+    }
+  </script>
+</body>
+</html>
