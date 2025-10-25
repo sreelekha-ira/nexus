@@ -97,7 +97,7 @@
     }
 
     .top-bar h1 {
-      font-size: 1.8em;
+      font-size: 2.5em;
       color: #80ccff;
       text-shadow: 0 0 10px #4022af60;
     }
@@ -201,16 +201,11 @@
     }
 
     .feed-post-avatar {
-      background: #7e5fff;
-      color: #fff;
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
       box-shadow: 0 0 10px #f700ff66;
+      object-fit: cover;
     }
 
     .feed-post-info {
@@ -442,7 +437,7 @@
 
     .match-desc { font-size: 1em; margin-bottom: 9px; }
     .match-details { font-size: 0.92em; color: #fcc3fc; margin-bottom: 7px; }
-    .accept-btn, .decline-btn {
+    .accept-btn, .decline-btn, .accepted-btn {
       font-size: 1em;
       margin: 5px 9px 0 0;
       border: none;
@@ -455,18 +450,23 @@
       box-shadow: 0 2px 8px #7e5fff43;
       transition: background .18s;
     }
-    .accept-btn:hover { background:linear-gradient(90deg,#67ffad,#19d7ff 70%) }
+    .accept-btn:hover { background: linear-gradient(90deg,#67ffad,#19d7ff 70%) }
     .decline-btn {
       background: linear-gradient(90deg,#444,#a0a0a0 80%);
       color: #fff;
     }
-    .decline-btn:hover { background:linear-gradient(90deg,#a00010,#444) }
+    .decline-btn:hover { background: linear-gradient(90deg,#a00010,#444) }
+    .accepted-btn {
+      background: #67ffad;
+      color: #fff;
+    }
+    .accepted-btn:hover { background: #19d7ff }
     ::-webkit-scrollbar { height: 8px; background: #19182a;}
     ::-webkit-scrollbar-thumb {background: #6442cc;border-radius:9px;}
 
     /* Live Matches */
     .live-matches {
-      margin-bottom: 40px;
+      margin-bottom: 60px; /* ✅ ADDED 60px PROFESSIONAL SPACING */
     }
 
     .live-match-card {
@@ -523,6 +523,8 @@
     }
 
     .games {
+      margin-top: 60px; /* ✅ ADDED 60px PROFESSIONAL SPACING */
+      margin-bottom: 60px; /* ✅ ADDED 60px PROFESSIONAL SPACING */
       --cols: 2;
       display: grid;
       grid-template-columns: repeat(var(--cols), minmax(0, var(--size-content-1)));
@@ -629,9 +631,11 @@
       background: #161c33;
       border-radius: 20px;
       padding: 20px;
-      margin: 20px 0;
+      margin: 40px auto; /* ✅ CHANGED TO 40px TOP/BOTTOM FOR PROFESSIONAL SPACING */
       box-shadow: 0 0 15px #f7d3ff33;
       border: 2px solid #393de7;
+      max-width: 300px;
+      align-self: flex-start;
     }
 
     .random-pair-box h3 {
@@ -691,16 +695,11 @@
     }
 
     .message-avatar {
-      background: #7e5fff;
-      color: #fff;
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
       box-shadow: 0 0 10px #f700ff66;
+      object-fit: cover;
     }
 
     .message-info {
@@ -762,18 +761,12 @@
     }
 
     .connection-avatar {
-      background: #7e5fff;
-      color: #fff;
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5em;
-      font-weight: bold;
       box-shadow: 0 0 10px #f700ff66;
       margin: 0 auto 10px;
+      object-fit: cover;
     }
 
     .connection-name {
@@ -787,6 +780,9 @@
     }
 
     .connection-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-top: 10px;
     }
 
@@ -798,7 +794,7 @@
       border-radius: 20px;
       cursor: pointer;
       box-shadow: 0 0 5px #7e5fff43;
-      margin: 0 5px;
+      margin: 0;
     }
 
     .connection-actions button:hover {
@@ -845,6 +841,7 @@
       border-radius: 50%;
       border: 3px solid #4dbda9;
       margin-bottom: 16px;
+      object-fit: cover;
     }
 
     .match-requests {
@@ -941,11 +938,40 @@
       box-shadow: 0 0 7px #9b78ff;
     }
 
-    .challenge::-webkit-scrollbar {
+    .applied-matches, .created-requests {
+      flex: 1 1 400px;
+      background: #291d57;
+      border-radius: 12px;
+      padding: 18px;
+      color: #d2bdf4;
+      min-width: 400px;
+    }
+
+    .applied-matches h3, .created-requests h3 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #caa2ff;
+      border-bottom: 2px solid #bda9f7;
+      padding-bottom: 8px;
+    }
+
+    .applied-matches .match-list, .created-requests .request-list {
+      background: #3e2d71;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      min-height: 120px;
+      overflow-y: auto;
+      color: #faf6ff;
+      box-shadow: inset 0 0 15px #a27afb;
+    }
+
+    .challenge::-webkit-scrollbar, .applied-matches .match-list::-webkit-scrollbar, .created-requests .request-list::-webkit-scrollbar {
       width: 5px;
     }
 
-    .challenge::-webkit-scrollbar-thumb {
+    .challenge::-webkit-scrollbar-thumb, .applied-matches .match-list::-webkit-scrollbar-thumb, .created-requests .request-list::-webkit-scrollbar-thumb {
       background-color: #8e68f9;
       border-radius: 8px;
     }
@@ -993,6 +1019,10 @@
       margin-bottom: 40px;
     }
 
+    .discover-players h2 {
+      margin-bottom: 40px; /* ADDED SPACE BETWEEN TITLE AND SEARCH BAR */
+    }
+
     .players-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -1015,18 +1045,12 @@
     }
 
     .player-avatar {
-      background: #7e5fff;
-      color: #fff;
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5em;
-      font-weight: bold;
       box-shadow: 0 0 10px #f700ff66;
       margin: 0 auto 10px;
+      object-fit: cover;
     }
 
     .player-name {
@@ -1091,6 +1115,294 @@
         width: 100%;
       }
     }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+      padding-top: 20px;
+    }
+
+    .modal-content {
+      background-color: #161c33;
+      margin: 2% auto;
+      border: 2px solid #393de7;
+      width: 95%;
+      max-width: 1000px;
+      max-height: 90vh;
+      padding: 0;
+      border-radius: 20px;
+      animation: fadeIn 0.3s;
+      display: flex;
+      overflow: hidden;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    .close {
+      position: absolute;
+      right: 25px;
+      top: 15px;
+      color: #ff44d7;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .close:hover {
+      color: #fff;
+    }
+
+    /* PROFILE MODAL SPECIFIC STYLES */
+    .profile-modal-container {
+      max-width: 1000px;
+      background-color: #241a44;
+      box-shadow: 0 0 30px 5px #36006cff;
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      overflow-y: auto;
+      height: 90vh;
+    }
+
+    .profile-modal-stats {
+      flex: 1 1 250px;
+      background: #362d59;
+      border-radius: 15px;
+      padding: 20px;
+      min-width: 250px;
+      color: #6af9c4;
+      text-align: center;
+    }
+
+    .profile-modal-stats img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #4dbda9;
+      margin: 0 auto 20px;
+      object-fit: cover;
+      box-shadow: 0 0 20px #4dbda9;
+    }
+
+    .profile-modal-stats h2 {
+      color: #6af9c4;
+      margin: 0 0 15px;
+      font-size: 1.8em;
+      text-shadow: 0 0 10px #4dbda9;
+    }
+
+    .profile-modal-stats h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #54ccb3;
+      padding-bottom: 10px;
+      color: #80ccff;
+    }
+
+    .profile-modal-stats .stat {
+      font-size: 1.2em;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(84, 204, 179, 0.1);
+      border-radius: 8px;
+      border-left: 3px solid #54ccb3;
+    }
+
+    .profile-modal-match-requests {
+      flex: 2 1 400px;
+      background: #291d57;
+      border-radius: 15px;
+      padding: 25px;
+      color: #d2bdf4;
+      min-width: 350px;
+    }
+
+    .profile-modal-match-requests h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #caa2ff;
+      border-bottom: 2px solid #bda9f7;
+      padding-bottom: 10px;
+    }
+
+    .profile-modal-challenge {
+      background: #3e2d71;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.1em;
+      margin-bottom: 25px;
+      min-height: 150px;
+      overflow-y: auto;
+      color: #faf6ff;
+      box-shadow: inset 0 0 20px #a27afb;
+      line-height: 1.6;
+    }
+
+    .profile-modal-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .profile-modal-btn {
+      padding: 12px 25px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      color: white;
+      box-shadow: 0 0 15px #9d81e9;
+      min-width: 120px;
+    }
+
+    .profile-modal-btn.accept {
+      background-color: #7a54ff;
+    }
+
+    .profile-modal-btn.accept:hover {
+      background-color: #b491ff;
+      transform: translateY(-2px);
+    }
+
+    .profile-modal-btn.decline {
+      background-color: #9f486f;
+    }
+
+    .profile-modal-btn.decline:hover {
+      background-color: #cf71a4;
+      transform: translateY(-2px);
+    }
+
+    .profile-modal-btn.message {
+      background: linear-gradient(90deg, #f700ff, #9f73ff);
+    }
+
+    .profile-modal-btn.message:hover {
+      background: linear-gradient(90deg, #ff44d7, #7e5fff);
+    }
+
+    .profile-modal-card-tiers {
+      flex: 1 1 200px;
+      background: #3c2c5b;
+      border-radius: 15px;
+      padding: 20px;
+      color: #f7ecff;
+      min-width: 200px;
+    }
+
+    .profile-modal-card-tiers h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.2em;
+      color: #ecd3ff;
+      border-bottom: 2px solid #7644cc;
+      padding-bottom: 10px;
+    }
+
+    .profile-modal-tier-item {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      padding: 12px;
+      background-color: #5b4785;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #9b78ff;
+      text-align: center;
+    }
+
+    .profile-modal-about {
+      flex: 1 1 300px;
+      background: #2a1e4e;
+      border-radius: 15px;
+      padding: 20px;
+      color: #e5e7fa;
+    }
+
+    .profile-modal-about h3 {
+      color: #80ccff;
+      border-bottom: 2px solid #7e5fff;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .profile-modal-games {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .profile-modal-game-tag {
+      background: #3a2d5e;
+      color: #fcc3fc;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.9em;
+      border: 1px solid #7e5fff;
+    }
+
+    .modal label {
+      color: #e5e7fa;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .modal select, .modal input, .modal textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #282c43;
+      border: none;
+      border-radius: 5px;
+      color: #e5e7fa;
+      box-shadow: 0 0 5px #7e5fff43;
+      transition: box-shadow 0.3s;
+    }
+
+    .modal select:focus, .modal input:focus, .modal textarea:focus {
+      box-shadow: 0 0 10px #ff44d7;
+    }
+
+    .modal button {
+      background: #7e5fff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      margin-right: 10px;
+    }
+
+    .modal button:hover {
+      background: #ff44d7;
+      transform: scale(1.05);
+    }
+
+    .modal .cancel-btn {
+      background: #282c43;
+      margin-left: 10px;
+    }
+
+    .modal .cancel-btn:hover {
+      background: #a00010;
+    }
   </style>
 </head>
 <body>
@@ -1110,7 +1422,7 @@
     </div>
   </nav>
 
-  <main id="discover">
+  <main id="discover" style="display: block;">
     <!-- Tournaments -->
     <section class="top-carousel-wrapper">
       <h2 style="text-align:left;font-size:1.5em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Tournaments</h2>
@@ -1141,7 +1453,7 @@
       </div>
     </section>
 
-    <!-- Live Matches -->
+    <!-- Live Matches ✅ WITH PROFESSIONAL SPACING -->
     <section class="live-matches">
       <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Live Matches</h2>
       <div class="live-match-card">
@@ -1160,7 +1472,7 @@
       </div>
     </section>
 
-    <!-- Games -->
+    <!-- Games ✅ WITH PROFESSIONAL SPACING -->
     <section class="games">
       <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Games</h2>
       <!-- Bloom cards -->
@@ -1185,57 +1497,60 @@
     <!-- Discover Players -->
     <section class="discover-players">
       <h2 style="text-align:center;font-size:2em;color:#80ccff;text-shadow:0 0 22px #4022af60;">Discover Players</h2>
-      <p>Find and connect with gamers worldwide</p>
-      <p>6 players found</p>
+      
+      <!-- ADDED 40px MARGIN FOR SPACE -->
+      <div style="margin-bottom: 40px;"></div>
+      
       <div class="search-bar">
         <span>&#128269;</span>
-        <input type="text" placeholder="Search players by name or gamertag...">
+        <input type="text" placeholder="Search players by name or gamertag..." oninput="searchPlayers(this.value)">
       </div>
+      
       <div class="filters">
-        <label>Gender <select><option>All genders</option><option>Male</option><option>Female</option><option>Other</option></select></label>
-        <label>Language <select><option>All languages</option><option>English</option><option>Spanish</option><option>French</option></select></label>
-        <label>Game <select><option>All games</option><option>League of Legends</option><option>Valorant</option><option>Fortnite</option></select></label>
-        <label>Distance <select><option>Global</option><option>Local</option><option>Regional</option></select></label>
+        <label> <select><option>All genders</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+        <label> <select><option>All languages</option><option>English</option><option>Spanish</option><option>French</option></select></label>
+        <label><select><option>All games</option><option>League of Legends</option><option>Valorant</option><option>Fortnite</option></select></label>
+        <label><select><option>Global</option><option>Local</option><option>Regional</option></select></label>
       </div>
       <div class="players-list">
         <div class="player-card">
-          <div class="player-avatar">AM</div>
+          <img class="player-avatar" src="https://wallpapers.com/images/hd/anime-boy-gaming-629lqovs7liqxhhp.jpg" alt="Hhhh">
           <div class="player-name">Hhhh</div>
-          <button class="view-profile-btn" onclick="viewProfile('Hhhh')">View Profile</button>
+          <button class="view-profile-btn" onclick="openPlayerProfile('Hhhh', 'Anime Gamer', 'https://wallpapers.com/images/hd/anime-boy-gaming-629lqovs7liqxhhp.jpg')">View Profile</button>
         </div>
         <div class="player-card">
-          <div class="player-avatar">HL</div>
+          <img class="player-avatar" src="https://i.pinimg.com/736x/db/19/53/db1953271bae15b939947eb482418ca5.jpg" alt="vvv">
           <div class="player-name">vvv</div>
-          <button class="view-profile-btn" onclick="viewProfile('vvv')">View Profile</button>
+          <button class="view-profile-btn" onclick="openPlayerProfile('vvv', 'Casual Player', 'https://i.pinimg.com/736x/db/19/53/db1953271bae15b939947eb482418ca5.jpg')">View Profile</button>
         </div>
         <div class="player-card">
-          <div class="player-avatar">ZM</div>
+          <img class="player-avatar" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cca2b778-662e-421b-993f-3d9855b0fd3e/debovw3-11cf403d-3bef-43f3-9865-2a2d10ff8c65.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9jY2EyYjc3OC02NjJlLTQyMWItOTkzZi0zZDk4NTViMGZkM2UvZGVib3Z3My0xMWNmNDAzZC0zYmVmLTQzZjMtOTg2NS0yYTJkMTBmZjhjNjUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.cbXbVfFBSXaTWPLFRBNthxuJgLVRbif0ttPytnLHzTk" alt="lll">
           <div class="player-name">lll</div>
-          <button class="view-profile-btn" onclick="viewProfile('lll')">View Profile</button>
+          <button class="view-profile-btn" onclick="openPlayerProfile('lll', 'Pro Gamer', 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cca2b778-662e-421b-993f-3d9855b0fd3e/debovw3-11cf403d-3bef-43f3-9865-2a2d10ff8c65.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9jY2EyYjc3OC02NjJlLTQyMWItOTkzZi0zZDk4NTViMGZkM2UvZGVib3Z3My0xMWNmNDAzZC0zYmVmLTQzZjMtOTg2NS0yYTJkMTBmZjhjNjUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.cbXbVfFBSXaTWPLFRBNthxuJgLVRbif0ttPytnLHzTk')">View Profile</button>
         </div>
         <div class="player-card">
-          <div class="player-avatar">JP</div>
+          <img class="player-avatar" src="https://img.freepik.com/free-photo/aesthetic-anime-character-gaming_23-2151560701.jpg" alt="JordanPro">
           <div class="player-name">JordanPro</div>
           <div class="player-location">Seattle, WA</div>
           <div class="player-desc">MOBA enthusiast and tournament organizer</div>
           <div class="player-games">Dota 2 • League of Legends • Heroes of the Storm</div>
-          <button class="view-profile-btn" onclick="viewProfile('JordanPro')">View Profile</button>
+          <button class="view-profile-btn" onclick="openPlayerProfile('JordanPro', 'Jordan Professional', 'https://img.freepik.com/free-photo/aesthetic-anime-character-gaming_23-2151560701.jpg')">View Profile</button>
         </div>
         <div class="player-card">
-          <div class="player-avatar">SR</div>
+          <img class="player-avatar" src="https://wallpapers.com/images/hd/gaming-profile-pictures-sip74wt5su5vkzgd.jpg" alt="SamTheSniper">
           <div class="player-name">SamTheSniper</div>
           <div class="player-location">Austin, TX</div>
           <div class="player-desc">Casual gamer, loves team-based strategy games</div>
           <div class="player-games">League of Legends • Overwatch 2 • Rocket League</div>
-          <button class="view-profile-btn" onclick="viewProfile('SamTheSniper')">View Profile</button>
+          <button class="view-profile-btn" onclick="openPlayerProfile('SamTheSniper', 'Sam The Sniper', 'https://wallpapers.com/images/hd/gaming-profile-pictures-sip74wt5su5vkzgd.jpg')">View Profile</button>
         </div>
         <div class="player-card">
-          <div class="player-avatar">AC</div>
+          <img class="player-avatar" src="https://media.craiyon.com/2025-07-12/M81gqAv9Ra6wvvTNZeM1sQ.webp" alt="AlexGamer">
           <div class="player-name">AlexGamer</div>
           <div class="player-location">San Francisco, CA</div>
           <div class="player-desc">Competitive FPS player looking for ranked teammates</div>
           <div class="player-games">Valorant • CS2 • Apex Legends</div>
-          <button class="view-profile-btn" onclick="viewProfile('AlexGamer')">View Profile</button>
+          <button class="view-profile-btn" onclick="openPlayerProfile('AlexGamer', 'Alex Gamer Pro', 'https://media.craiyon.com/2025-07-12/M81gqAv9Ra6wvvTNZeM1sQ.webp')">View Profile</button>
         </div>
       </div>
     </section>
@@ -1245,15 +1560,15 @@
     <div class="top-bar">
       <h1>Match Feed <span class="status">&#128267; Live</span></h1>
       <div>
-        <button title="Hidden">&#128065;&#8205;&#128488;</button>
-        <button title="Refresh">&#128260;</button>
-        <button class="create-btn">+ Create</button>
+        <button title="Hidden" onclick="toggleHide()">&#128065;&#8205;&#128488;</button>
+        <button title="Refresh" onclick="refreshFeed()">&#128260;</button>
+        <button class="create-btn" onclick="openCreateModal()">+ Create</button>
       </div>
     </div>
 
     <div class="search-bar">
       <span>&#128269;</span>
-      <input type="text" placeholder="Search games, descriptions, or gamer tags...">
+      <input type="text" placeholder="Search games, descriptions, or gamer tags..." oninput="searchFeed(this.value)">
     </div>
 
     <div class="filters">
@@ -1303,7 +1618,9 @@
   <main id="profile" style="display: none;">
     <div class="profile-container">
       <div class="profile-stats">
-        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Profile Picture" />
+        <img id="profile-pic" src="https://wallpapers.com/images/hd/gaming-profile-pictures-tmjjc9v0w80azoeh.jpg" alt="Profile Picture" />
+        <h2 id="profile-name">Your Name</h2>
+        <button onclick="openEditProfileModal()" style="background: #7e5fff; color: #fff; padding: 8px 15px; border-radius: 20px; font-weight: bold; box-shadow: 0 0 10px #f700ff66; border: none; cursor: pointer; margin-bottom: 16px;">Edit Profile</button>
         <h3>Player Stats</h3>
         <div class="stat">Rank: <strong>#12</strong></div>
         <div class="stat">Wins: <strong>45</strong></div>
@@ -1320,6 +1637,20 @@
         <div class="buttons">
           <button class="btn accept" onclick="alert('Challenge Accepted')">Accept</button>
           <button class="btn decline" onclick="alert('Challenge Declined')">Decline</button>
+        </div>
+      </div>
+
+      <div class="applied-matches">
+        <h3>Applied Matches</h3>
+        <div class="match-list" id="appliedMatchesList">
+          <!-- Applied matches will be populated by JS -->
+        </div>
+      </div>
+
+      <div class="created-requests">
+        <h3>Created Requests</h3>
+        <div class="request-list" id="createdRequestsList">
+          <!-- Created requests will be populated by JS -->
         </div>
       </div>
 
@@ -1349,6 +1680,91 @@
       </div>
     </div>
   </main>
+
+  <!-- Create Post Modal -->
+  <div id="createPostModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCreateModal()">&times;</span>
+      <h2>Create Match Request</h2>
+      <form id="createPostForm">
+        <label for="game">Game</label>
+        <select id="game" required>
+          <option>Select a game</option>
+          <option>League of Legends</option>
+          <option>Valorant</option>
+          <option>Fortnite</option>
+        </select>
+
+        <label for="game-mode">Game Mode</label>
+        <select id="game-mode" required>
+          <option>Select mode</option>
+          <option>1v1</option>
+          <option>Squad</option>
+          <option>Team</option>
+        </select>
+
+        <label for="region">Region</label>
+        <select id="region" required>
+          <option>Select region</option>
+          <option>NA Central</option>
+          <option>Asia</option>
+          <option>EU West</option>
+          <option>Global</option>
+        </select>
+
+        <label for="tournament">Tournament (Optional)</label>
+        <input type="text" id="tournament" placeholder="e.g., Spring Championship">
+
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Describe what you're looking for, your skill level, requirements, etc." required></textarea>
+
+        <button type="submit">+ Create Match Request</button>
+        <button type="button" class="cancel-btn" onclick="closeCreateModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Compose Message Modal -->
+  <div id="composeMessageModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeComposeModal()">&times;</span>
+      <h2>Compose Message</h2>
+      <form id="composeMessageForm">
+        <label for="recipient">To</label>
+        <input type="text" id="recipient" readonly>
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Type your message..." required></textarea>
+        <button type="submit">Send</button>
+        <button type="button" class="cancel-btn" onclick="closeComposeModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div id="editProfileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditProfileModal()">&times;</span>
+      <h2>Edit Profile</h2>
+      <form id="editProfileForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <label for="pic-url">Profile Picture URL</label>
+        <input type="text" id="pic-url" required>
+        <button type="submit">Save</button>
+        <button type="button" class="cancel-btn" onclick="closeEditProfileModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PLAYER PROFILE MODAL -->
+  <div id="playerProfileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closePlayerProfileModal()">&times;</span>
+      <div class="profile-modal-container" id="playerProfileContent">
+        <!-- Content populated by JavaScript -->
+      </div>
+    </div>
+  </div>
 
   <script>
     // Sidebar Navigation
@@ -1381,13 +1797,33 @@
 
     // Tournament Carousel Data
     const topCards = [
-      { img: 'https://i.pinimg.com/474x/af/22/2c/af222cef9b3b24882570bdd30882ec60.jpg', title: 'TORNAMENT 1' },
-      { img: 'https://i.pinimg.com/736x/a8/4a/38/a84a3835cd7d65bcbc094ea93ff07efa.jpg', title: 'TORNAMENT 2' },
-      { img: 'https://thumbs.dreamstime.com/b/valerie-cyberpunk-vertical-k-valerie-cyberpunk-neon-vertical-k-mobile-wallpaper-320503484.jpg', title: 'TORNAMENT 3' },
-      { img: 'https://img.freepik.com/premium-photo/abstract-cyberpunk-technology-gaming-neon-theme-background-mobile-vertical-wallpaper-ai-generated-image_1087980-5678.jpg?w=360', title: 'TORNAMENT 4' },
-      { img: 'https://cdn.displate.com/artwork/270x380/2023-09-07/a8ac9f77d879b280ce857942b3de6001_52a705cdc4c83f2f24fae30de73238d4.jpg', title: 'TORNAMENT 5' },
-      { img: 'https://thumbs.dreamstime.com/b/valerie-cyberpunk-vertical-k-neon-mobile-wallpaper-320503609.jpg', title: 'TORNAMENT 6' },
-    ];
+  // ORIGINAL 6
+  { img: 'https://i.pinimg.com/474x/af/22/2c/af222cef9b3b24882570bdd30882ec60.jpg', title: 'Global Cyber League' },
+  { img: 'https://i.pinimg.com/736x/a8/4a/38/a84a3835cd7d65bcbc094ea93ff07efa.jpg', title: 'Neon Samurai Showdown' },
+  { img: 'https://thumbs.dreamstime.com/b/valerie-cyberpunk-vertical-k-valerie-cyberpunk-neon-vertical-k-mobile-wallpaper-320503484.jpg', title: 'Metroplex Battle Royale' },
+  { img: 'https://img.freepik.com/premium-photo/abstract-cyberpunk-technology-gaming-neon-theme-background-mobile-vertical-wallpaper-ai-generated-image_1087980-5678.jpg?w=360', title: 'Quantum Card Clash' },
+  { img: 'https://cdn.displate.com/artwork/270x380/2023-09-07/a8ac9f77d879b280ce857942b3de6001_52a705cdc4c83f2f24fae30de73238d4.jpg', title: 'Chrome Circuit Rivals' },
+  { img: 'https://thumbs.dreamstime.com/b/valerie-cyberpunk-vertical-k-neon-mobile-wallpaper-320503609.jpg', title: 'Digital Dojo Masters' },
+  { img: 'https://upload.wikimedia.org/wikipedia/en/3/36/Evo_Championship_Series_Logo.png', title: 'EVO Championship Series' },
+  { img: 'https://upload.wikimedia.org/wikipedia/en/9/99/The_International_logo.png', title: 'The International' },
+  { img: 'https://images.fandango.com/ImageRenderer/820/0/redesign/static/img/default_poster.png/0/images/masterrepository/fandango/229496/2022_09_26LeagueofLegends_w22-eventcinema-theatricalposter-27x40.jpg', title: 'League of Legends Worlds' },
+  { img: 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/wm/2023/05/mlg-major-championship-columbus-2016_done.jpg?q=50&fit=crop&w=825&dpr=1.5', title: 'CS:GO Major' },
+  { img: 'https://cdn2.unrealengine.com/Fortnite+Esports%2Fblog%2Ffortnite-world-cup-details%2FFN_Competitive_Social_FWC_Announce-1920x1080-ec4306cddd1e003944a63e282359d29b86bb52b6.jpg', title: 'Fortnite World Cup' },
+  { img: 'https://upload.wikimedia.org/wikipedia/en/1/1b/OWL_2021_Grand_Finals_logo.png', title: 'Overwatch League Grand Finals' },
+  { img: 'https://art4fans.com/cdn/shop/files/six-invitational-kali-rainbow-six-art-614051.jpg?v=1741799905', title: 'Rainbow Six Siege Invitational' },
+  { img: 'https://www.dexerto.com/cdn-image/wp-content/uploads/2025/06/17/cdl-championship-weekend-2025.jpg?width=1200&quality=60&format=auto', title: 'Call of Duty League' },
+  { img: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Valorant_Champions_Tour_logo.png', title: 'Valorant Champions' },
+  { img: 'https://static.wikia.nocookie.net/fifa_esports_gamepedia_en/images/e/e8/FIFA_eWorld_Cup_2019_logo.png/revision/latest/scale-to-width-down/220?cb=20190729231148', title: 'FIFA eWorld Cup' },
+  { img: 'https://cdn.myportfolio.com/c7158298-6750-4af5-82af-29d651410e30/84cd25a9-ae29-42b9-8951-26bc98d37bce_rw_1920.png?h=dee5371f6652b4f86d3469b78adb5c78', title: 'Rocket League Championship' },
+  { img: 'https://assets-prd.ignimgs.com/2022/12/16/smashworldtour-blogroll-02-1671212747188.jpeg', title: 'Smash World Tour' },
+  { img: 'https://wstatic-prod-boc.krafton.com/common/news/20241202/3kv4SK1g.jpg', title: 'PUBG Global Championship' },
+  { img: 'https://mlpnk72yciwc.i.optimole.com/cqhiHLc.IIZS~2ef73/w:auto/h:auto/q:75/https://bleedingcool.com/wp-content/uploads/2024/05/Apex-Legends-Global-Series-Logo-Artwork.jpg', title: 'Apex Legends Global Series' },
+  { img: 'https://static.wikia.nocookie.net/halo/images/1/1e/HCSLogo.png/revision/latest?cb=20150509025624', title: 'Halo Championship Series' },
+  { img: 'https://images2.minutemediacdn.com/image/upload/c_crop,w_1279,h_719,x_0,y_0/c_fill,w_1200,ar_4:3,f_auto,q_auto,g_auto/images/voltaxMediaLibrary/mmsport/esports_illustrated/01jks8x7jvva9hwhvj9s.png', title: 'Street Fighter Capcom Cup' },
+  { img: 'https://cdn.escharts.com/media/quick-upload/2023/02/pasted%20image%200-ec97d6322d090b0be40735c129501e96.png?width=&height=', title: 'Tekken World Tour' },
+  { img: 'https://i.ebayimg.com/images/g/lp0AAOSwsRNl77xu/s-l1200.jpg', title: 'Magic: The Gathering Pro Tour' },
+
+];
 
     const topCarousel = document.getElementById('top-carousel');
     let currentIndex = 0;
@@ -1431,31 +1867,31 @@
     // Match Requests Data
     const matches = [
       {
-        img: "https://static.vecteezy.com/system/resources/previews/028/108/958/large_2x/3d-esport-gamer-character-for-game-avatar-ai-generated-photo.jpg",
+        img: "https://www.shutterstock.com/image-vector/gamer-anime-boy-playing-on-600nw-1828930421.jpg",
         title: "Capture the Flag",
         desc: "Squad needed for CTF.",
         details: "K/D 1.9 • 6700XP",
       },
       {
-        img: "https://cdn.pixabay.com/photo/2016/08/20/05/39/avatar-1606916_1280.png",
+        img: "https://i.etsystatic.com/44421772/r/il/c964ba/6205632549/il_fullxfull.6205632549_2p8e.jpg",
         title: "Battle Royale",
         desc: "Battling for Platinum Tier.",
         details: "K/D 4.0 • 10120XP",
       },
       {
-        img: "https://cdn.pixabay.com/photo/2017/01/06/19/15/avatar-1958246_1280.png",
+        img: "https://play-lh.googleusercontent.com/Dj7cruHjT5ejOFrF5HcW2Ryo-n79imSBbUf2OVfrZkUII1httatA30zl5-x8JSBdLzG-",
         title: "1v1 Arena",
         desc: "Solo Ranked Challenge!",
         details: "K/D 3.1 • 7500XP",
       },
       {
-        img: "https://cdn.pixabay.com/photo/2014/04/03/10/32/businessman-312822_1280.png",
+        img: "https://play-lh.googleusercontent.com/yVObWmhZFMYi_KF9Wb4Z560ussu5lS6Ad96hoSIk8NTfcewZTNWUmCWU4fjutSuGlWQk",
         title: "Deathmatch",
         desc: "New Team Deathmatch Request!",
         details: "K/D 2.2 • 8900XP",
       },
       {
-        img: "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_1280.png",
+        img: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3f/c8/01/3fc8018f-36cf-d54a-91ec-6001408b26c8/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x600wa.png",
         title: "Squad Skirmish",
         desc: "Hardcore team match.",
         details: "K/D 2.5 • 8200XP",
@@ -1484,15 +1920,50 @@
 
     // Games Data
     const gamesData = [
-      { img: 'https://cdn.mos.cms.futurecdn.net/JhNtmh6bDM6F9LXiAWSLUQ.jpg', title: 'Reaver' },
-      { img: 'https://www.gameart2d.com/uploads/3/0/9/1/30917885/sci-fi-tcg-template-4_orig.png', title: 'Sci-Fi TCG' },
-      { img: 'https://i.etsystatic.com/54229888/r/il/d60743/6214731330/il_570xN.6214731330_799q.jpg', title: 'Futuristic Card' },
-      { img: 'https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000082492/775d29e8e95d84b2890eda7958a2367fd56d6ffcfee95a5227ade62fde8989ec', title: 'Metroplex Zero' },
-      { img: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1533420/capsule_616x353.jpg?t=1729099604', title: 'Neon White' },
-      { img: 'https://m.media-amazon.com/images/I/71RvmdQgIFL.jpg', title: 'Cyberpunk RED' },
-      { img: 'https://4kwallpapers.com/images/wallpapers/motorcycle-cyberpunk-2077-neon-art-neon-lights-triangles-4200x3000-7289.jpg', title: 'Cyber Bike' },
-      { img: 'https://i.pinimg.com/736x/a8/4a/38/a84a3835cd7d65bcbc094ea93ff07efa.jpg', title: 'Samurai' },
-    ];
+  // ORIGINAL GAMES
+  { img: 'https://cdn.mos.cms.futurecdn.net/JhNtmh6bDM6F9LXiAWSLUQ.jpg', title: 'Reaver' },
+  { img: 'https://www.gameart2d.com/uploads/3/0/9/1/30917885/sci-fi-tcg-template-4_orig.png', title: 'Sci-Fi TCG' },
+  { img: 'https://i.etsystatic.com/54229888/r/il/d60743/6214731330/il_570xN.6214731330_799q.jpg', title: 'Futuristic Card' },
+  { img: 'https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000082492/775d29e8e95d84b2890eda7958a2367fd56d6ffcfee95a5227ade62fde8989ec', title: 'Metroplex Zero' },
+  { img: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1533420/capsule_616x353.jpg?t=1729099604', title: 'Neon White' },
+  { img: 'https://m.media-amazon.com/images/I/71RvmdQgIFL.jpg', title: 'Cyberpunk RED' },
+  { img: 'https://4kwallpapers.com/images/wallpapers/motorcycle-cyberpunk-2077-neon-art-neon-lights-triangles-4200x3000-7289.jpg', title: 'Cyber Bike' },
+  { img: 'https://i.pinimg.com/736x/a8/4a/38/a84a3835cd7d65bcbc094ea93ff07efa.jpg', title: 'Samurai' },
+
+  // NEW REAL GAMES ADDED
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2glr.jpg', title: 'The Legend of Zelda: Breath of the Wild' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1t1c.jpg', title: 'Super Mario Odyssey' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2c9z.jpg', title: 'God of War (2018)' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2i7h.jpg', title: 'Animal Crossing: New Horizons' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co21wk.jpg', title: 'Among Us' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2c9u.jpg', title: 'Hades' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1v7z.jpg', title: 'Celeste' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2i7g.jpg', title: 'DOOM Eternal' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1th4.jpg', title: 'Stardew Valley' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6g4v.jpg', title: 'Overwatch 2' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co5g5p.jpg', title: 'Elden Ring' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co4m2e.jpg', title: 'It Takes Two' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1t7s.jpg', title: 'The Witcher 3: Wild Hunt' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1th3.jpg', title: 'Fortnite' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1th2.jpg', title: 'Minecraft' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2c9y.jpg', title: 'Red Dead Redemption 2' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1th1.jpg', title: 'Portal 2' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2c9x.jpg', title: 'Cuphead' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2i7f.jpg', title: 'Genshin Impact' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2c9w.jpg', title: 'Hollow Knight' },
+  
+  // 2023 RELEASES
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2r.jpg', title: 'Baldur\'s Gate 3' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2q.jpg', title: 'Street Fighter 6' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2p.jpg', title: 'Alan Wake 2' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2o.jpg', title: 'Spider-Man 2' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2n.jpg', title: 'Resident Evil 4 Remake' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2m.jpg', title: 'Diablo IV' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2l.jpg', title: 'Final Fantasy XVI' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2k.jpg', title: 'Hogwarts Legacy' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2j.jpg', title: 'Starfield' },
+  { img: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6k2i.jpg', title: 'Super Mario Bros. Wonder' }
+];
 
     const gamesSection = document.querySelector('.games');
     gamesData.forEach((g, i) => {
@@ -1514,9 +1985,9 @@
     }
 
     // Feed Posts Data
-    const feedPostsData = [
+    let feedPostsData = [
       {
-        avatar: 'LL',
+        avatar: 'https://i.pinimg.com/736x/61/23/55/612355261acbdcbdf1371dd029d51856.jpg',
         title: 'III',
         game: 'League of Legends &#128293; 1v1',
         desc: 'Looking for Teammates',
@@ -1525,7 +1996,7 @@
         tag: 'teammates'
       },
       {
-        avatar: 'VV',
+        avatar: 'https://i.pinimg.com/236x/dd/b7/b5/ddb7b5437db1cff0d0ef0acb390b04ca.jpg',
         title: 'Vvv',
         game: 'Valorant &#128293; 1v1',
         desc: 'Challenge',
@@ -1534,7 +2005,7 @@
         tag: 'challenge'
       },
       {
-        avatar: 'GG',
+        avatar: 'https://files.idyllic.app/files/static/3955890',
         title: 'GamerPro',
         game: 'Fortnite &#128293; Squad',
         desc: 'Squad',
@@ -1543,7 +2014,7 @@
         tag: 'squad'
       },
       {
-        avatar: 'HH',
+        avatar: 'https://wallpapers.com/images/hd/gaming-profile-pictures-tmjjc9v0w80azoeh.jpg',
         title: 'Hero',
         game: 'Dota 2 &#128293; Team',
         desc: 'Looking for Teammates',
@@ -1556,23 +2027,24 @@
     const feedPosts = document.getElementById('feed-posts');
     function renderFeedPosts(filter = 'all') {
       feedPosts.innerHTML = '';
-      feedPostsData.filter(p => filter === 'all' || p.tag === filter).forEach(p => {
+      feedPostsData.filter(p => filter === 'all' || p.tag === filter).forEach((p, index) => {
         const post = document.createElement('div');
         post.className = 'feed-post';
+        post.dataset.index = index;
         post.innerHTML = `
           <div class="feed-post-header">
-            <div class="feed-post-avatar">${p.avatar}</div>
+            <img class="feed-post-avatar" src="${p.avatar}" alt="${p.title}">
             <div class="feed-post-info">
               <div class="feed-post-title">${p.title}</div>
               <div class="feed-post-game">${p.game}</div>
             </div>
-            <button class="feed-post-desc">${p.desc}</button>
+            <span class="feed-post-tag">${p.desc}</span>
           </div>
           <div class="feed-post-content">${p.content}</div>
           <div class="feed-post-meta">${p.meta}</div>
           <div class="feed-post-actions">
-            <button class="apply-btn">Apply to Match</button>
-            <button class="pass-btn">Pass</button>
+            <button class="apply-btn" onclick="applyToMatch(${index})">Apply to Match</button>
+            <button class="pass-btn" onclick="passMatch(${index})">Pass</button>
           </div>
         `;
         feedPosts.appendChild(post);
@@ -1589,7 +2061,6 @@
       renderFeedPosts(tag);
     }
 
-    // Random Pairing Function
     function randomPairing() {
       const randomIndex = Math.floor(Math.random() * feedPostsData.length);
       const paired = feedPostsData[randomIndex];
@@ -1609,44 +2080,50 @@
     }
 
     // Connections Data
-    const connectionsData = [
-      { avatar: 'A', name: 'Alice', status: 'Online' },
-      { avatar: 'B', name: 'Bob', status: 'Offline' },
-      { avatar: 'C', name: 'Charlie', status: 'In Game' },
-      { avatar: 'D', name: 'Dana', status: 'Online' },
-      { avatar: 'E', name: 'Eve', status: 'Offline' },
+    let connectionsData = [
+      { img: 'https://wallpapers.com/images/hd/gaming-profile-pictures-sip74wt5su5vkzgd.jpg', name: 'Alice', status: 'Online' },
+      { img: 'https://media.craiyon.com/2025-07-12/M81gqAv9Ra6wvvTNZeM1sQ.webp', name: 'Bob', status: 'Offline' },
+      { img: 'https://i.pinimg.com/736x/61/23/55/612355261acbdcbdf1371dd029d51856.jpg', name: 'Charlie', status: 'In Game' },
+      { img: 'https://i.pinimg.com/236x/dd/b7/b5/ddb7b5437db1cff0d0ef0acb390b04ca.jpg', name: 'Dana', status: 'Online' },
+      { img: 'https://files.idyllic.app/files/static/3955890', name: 'Eve', status: 'Offline' },
     ];
 
     const connectionsList = document.querySelector('.connections-list');
-    connectionsData.forEach(c => {
-      const card = document.createElement('div');
-      card.className = 'connection-card';
-      card.innerHTML = `
-        <div class="connection-avatar">${c.avatar}</div>
-        <div class="connection-name">${c.name}</div>
-        <div class="connection-status">${c.status}</div>
-        <div class="connection-actions">
-          <button onclick="messageConnection('${c.name}')">Message</button>
-          <button onclick="removeConnection('${c.name}')">Remove</button>
-        </div>
-      `;
-      connectionsList.appendChild(card);
-    });
-
-    function messageConnection(name) {
-      alert(`Messaging ${name}...`);
+    function renderConnections() {
+      connectionsList.innerHTML = '';
+      connectionsData.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'connection-card';
+        card.dataset.name = c.name;
+        card.innerHTML = `
+          <img class="connection-avatar" src="${c.img}" alt="${c.name}">
+          <div class="connection-name">${c.name}</div>
+          <div class="connection-status">${c.status}</div>
+          <div class="connection-actions">
+            <button onclick="openComposeModal('${c.name}')">Message</button>
+            <button onclick="removeConnection('${c.name}')">Remove</button>
+          </div>
+        `;
+        connectionsList.appendChild(card);
+      });
     }
+    renderConnections();
 
     function removeConnection(name) {
-      alert(`Removed ${name} from connections.`);
+      const index = connectionsData.findIndex(c => c.name === name);
+      if (index > -1) {
+        connectionsData.splice(index, 1);
+        renderConnections();
+        alert(`Removed ${name} from connections.`);
+      }
     }
 
     // Messages Data
     const messagesData = [
-      { avatar: 'A', sender: 'Alice', time: '5 min ago', content: 'Hey, want to team up for the tournament?' },
-      { avatar: 'B', sender: 'Bob', time: '1 hour ago', content: 'GG on the last match!' },
-      { avatar: 'C', sender: 'Charlie', time: 'Yesterday', content: 'Check out this new game mode.' },
-      { avatar: 'D', sender: 'Dana', time: '2 hours ago', content: 'Ready for the next challenge?' },
+      { img: 'https://wallpapers.com/images/hd/gaming-profile-pictures-sip74wt5su5vkzgd.jpg', sender: 'Alice', time: '5 min ago', content: 'Hey, want to team up for the tournament?' },
+      { img: 'https://media.craiyon.com/2025-07-12/M81gqAv9Ra6wvvTNZeM1sQ.webp', sender: 'Bob', time: '1 hour ago', content: 'GG on the last match!' },
+      { img: 'https://i.pinimg.com/736x/61/23/55/612355261acbdcbdf1371dd029d51856.jpg', sender: 'Charlie', time: 'Yesterday', content: 'Check out this new game mode.' },
+      { img: 'https://i.pinimg.com/236x/dd/b7/b5/ddb7b5437db1cff0d0ef0acb390b04ca.jpg', sender: 'Dana', time: '2 hours ago', content: 'Ready for the next challenge?' },
     ];
 
     const messagesList = document.querySelector('.messages-list');
@@ -1655,21 +2132,17 @@
       card.className = 'message-card';
       card.innerHTML = `
         <div class="message-header">
-          <div class="message-avatar">${m.avatar}</div>
+          <img class="message-avatar" src="${m.img}" alt="${m.sender}">
           <div class="message-info">
             <div class="message-sender">${m.sender}</div>
           </div>
           <div class="message-time">${m.time}</div>
         </div>
         <div class="message-content">${m.content}</div>
-        <button class="reply-btn" onclick="replyToMessage('${m.sender}')">Reply</button>
+        <button class="reply-btn" onclick="openComposeModal('${m.sender}')">Reply</button>
       `;
       messagesList.appendChild(card);
     });
-
-    function replyToMessage(sender) {
-      alert(`Replying to ${sender}...`);
-    }
 
     // Settings Functions
     function toggleDarkMode() {
@@ -1684,10 +2157,192 @@
       alert('Toggling Privacy...');
     }
 
-    // View Profile
+    // PLAYER PROFILE MODAL FUNCTIONS
+    function openPlayerProfile(gamertag, displayName, avatarUrl) {
+      const modal = document.getElementById('playerProfileModal');
+      const content = document.getElementById('playerProfileContent');
+      
+      content.innerHTML = `
+        <div class="profile-modal-stats">
+          <img src="${avatarUrl}" alt="${displayName}">
+          <h2>${displayName}</h2>
+          <h3>Player Stats</h3>
+          <div class="stat">Rank: <strong>#${Math.floor(Math.random() * 100) + 1}</strong></div>
+          <div class="stat">Wins: <strong>${Math.floor(Math.random() * 100) + 20}</strong></div>
+          <div class="stat">K/D: <strong>${(Math.random() * 3 + 1).toFixed(1)}</strong></div>
+          <div class="stat">XP: <strong>${Math.floor(Math.random() * 15000) + 5000}</strong></div>
+          <div class="stat">Games Played: <strong>${Math.floor(Math.random() * 500) + 100}</strong></div>
+        </div>
+
+        <div class="profile-modal-match-requests">
+          <h3>Recent Match Requests</h3>
+          <div class="profile-modal-challenge">
+            <strong>Team Deathmatch Challenge</strong><br><br>
+            Looking for skilled players for ranked TDM. Must have 2.0+ K/D and good comms. 
+            Tournament prep - serious players only!
+          </div>
+          <div class="profile-modal-buttons">
+            <button class="profile-modal-btn accept" onclick="alert('Challenge Accepted!')">Accept Challenge</button>
+            <button class="profile-modal-btn decline" onclick="alert('Challenge Declined')">Decline</button>
+          </div>
+        </div>
+
+        <div class="profile-modal-card-tiers">
+          <h3>Card Collection</h3>
+          <div class="profile-modal-tier-item">Bronze: <strong>18/20</strong></div>
+          <div class="profile-modal-tier-item">Silver: <strong>12/15</strong></div>
+          <div class="profile-modal-tier-item">Gold: <strong>8/10</strong></div>
+          <div class="profile-modal-tier-item">Platinum: <strong>3/8</strong></div>
+        </div>
+
+        <div class="profile-modal-about">
+          <h3>About ${gamertag}</h3>
+          <p><strong>Location:</strong> Seattle, WA</p>
+          <p><strong>Bio:</strong> Competitive MOBA player with 5+ years experience. Tournament organizer and analyst.</p>
+          <p><strong>Playstyle:</strong> Strategic, team-focused</p>
+          <p><strong>Availability:</strong> Weekends & Evenings</p>
+          <h4>Favorite Games:</h4>
+          <div class="profile-modal-games">
+            <span class="profile-modal-game-tag">Dota 2</span>
+            <span class="profile-modal-game-tag">League of Legends</span>
+            <span class="profile-modal-game-tag">Heroes of the Storm</span>
+          </div>
+          <div class="profile-modal-buttons" style="justify-content: center; margin-top: 20px;">
+            <button class="profile-modal-btn message" onclick="openComposeModal('${gamertag}')">Send Message</button>
+            <button class="profile-modal-btn accept" onclick="alert('Added to Friends!')">Add Friend</button>
+          </div>
+        </div>
+      `;
+      
+      modal.style.display = 'block';
+    }
+
+    function closePlayerProfileModal() {
+      document.getElementById('playerProfileModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const playerModal = document.getElementById('playerProfileModal');
+      if (event.target == playerModal) {
+        closePlayerProfileModal();
+      }
+    }
+
+    // View Profile (OLD FUNCTION - NOW REPLACED)
     function viewProfile(name) {
       alert(`Viewing profile of ${name}...`);
     }
+
+    // Additional Functions
+    function openCreateModal() {
+      document.getElementById('createPostModal').style.display = 'block';
+    }
+
+    function closeCreateModal() {
+      document.getElementById('createPostModal').style.display = 'none';
+    }
+
+    document.getElementById('createPostForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const game = document.getElementById('game').value;
+      const gameMode = document.getElementById('game-mode').value;
+      const region = document.getElementById('region').value;
+      const tournament = document.getElementById('tournament').value;
+      const description = document.getElementById('description').value;
+
+      // Simulate adding to feed
+      feedPostsData.push({
+        avatar: document.getElementById('profile-pic').src,
+        title: document.getElementById('profile-name').textContent,
+        game: `${game} &#128293; ${gameMode}`,
+        desc: tournament || 'No Tournament',
+        meta: `Just now • ${region}`,
+        content: description,
+        tag: 'request'
+      });
+      renderFeedPosts();
+      closeCreateModal();
+      alert('Match Request Created!');
+    });
+
+    let isHidden = false;
+    function toggleHide() {
+      isHidden = !isHidden;
+      feedPosts.style.display = isHidden ? 'none' : 'block';
+    }
+
+    function refreshFeed() {
+      renderFeedPosts();
+    }
+
+    function applyToMatch(index) {
+      alert(`Applied to match: ${feedPostsData[index].title}`);
+    }
+
+    function passMatch(index) {
+      alert(`Passed match: ${feedPostsData[index].title}`);
+      feedPostsData.splice(index, 1);
+      renderFeedPosts();
+    }
+
+    function searchFeed(value) {
+      const lowerValue = value.toLowerCase();
+      const posts = document.querySelectorAll('.feed-post');
+      posts.forEach(post => {
+        const title = post.querySelector('.feed-post-title').textContent.toLowerCase();
+        const desc = post.querySelector('.feed-post-content').textContent.toLowerCase();
+        post.style.display = title.includes(lowerValue) || desc.includes(lowerValue) ? 'block' : 'none';
+      });
+    }
+
+    function searchPlayers(value) {
+      const lowerValue = value.toLowerCase();
+      const cards = document.querySelectorAll('.player-card');
+      cards.forEach(card => {
+        const name = card.querySelector('.player-name').textContent.toLowerCase();
+        card.style.display = name.includes(lowerValue) ? 'block' : 'none';
+      });
+    }
+
+    // Compose Message Modal Functions
+    function openComposeModal(recipient) {
+      document.getElementById('composeMessageModal').style.display = 'block';
+      document.getElementById('recipient').value = recipient;
+      document.getElementById('message').value = '';
+    }
+
+    function closeComposeModal() {
+      document.getElementById('composeMessageModal').style.display = 'none';
+    }
+
+    document.getElementById('composeMessageForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const recipient = document.getElementById('recipient').value;
+      const message = document.getElementById('message').value;
+      alert(`Message sent to ${recipient}: ${message}`);
+      closeComposeModal();
+    });
+
+    // Edit Profile Modal Functions
+    function openEditProfileModal() {
+      document.getElementById('editProfileModal').style.display = 'block';
+      document.getElementById('name').value = document.getElementById('profile-name').textContent;
+      document.getElementById('pic-url').value = document.getElementById('profile-pic').src;
+    }
+
+    function closeEditProfileModal() {
+      document.getElementById('editProfileModal').style.display = 'none';
+    }
+
+    document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const newName = document.getElementById('name').value;
+      const newPic = document.getElementById('pic-url').value;
+      document.getElementById('profile-name').textContent = newName;
+      document.getElementById('profile-pic').src = newPic;
+      closeEditProfileModal();
+    });
   </script>
 </body>
 </html>
